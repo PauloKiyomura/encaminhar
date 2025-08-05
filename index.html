@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATENDIMENTO NATALIA FERREIRA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo img {
+            max-width: 150px;
+            height: auto;
+            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.4));
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #fff;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            margin-top: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+            transform: scale(1.03);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+        }
+        
+        .print-button {
+            background-color: #27ae60;
+        }
+        
+        .print-button:hover {
+            background-color: #219653;
+        }
+        
+        .result-container {
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: none;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
+        }
+        
+        .result-container h2 {
+            color: #fff;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+        }
+        
+        .result-content {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.1);
+            font-family: 'Times New Roman', Times, serif;
+            color: #000;
+        }
+        
+        .date-time-group {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .date-time-group > div {
+            flex: 1;
+        }
+        
+        @media (max-width: 600px) {
+            .date-time-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="imagem.PNG" alt="Logo Clínica Psicopedagógica">
+        </div>
+        
+        <h1>ATENDIMENTO NATALIA FERREIRA</h1>
+        
+        <form id="encaminhamentoForm">
+            <div class="form-group">
+                <label for="nome">Nome do Paciente:</label>
+                <input type="text" id="nome" required placeholder="Digite o nome completo do paciente">
+            </div>
+            
+            <div class="form-group">
+                <label for="idade">Idade:</label>
+                <input type="number" id="idade" required min="0" max="120" placeholder="Idade em anos">
+            </div>
+            
+            <div class="date-time-group">
+                <div class="form-group">
+                    <label for="data">Data:</label>
+                    <input type="date" id="data" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="hora">Hora:</label>
+                    <input type="time" id="hora" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="diagnostico">Possível Diagnóstico:</label>
+                <textarea id="diagnostico" required placeholder="Descreva o possível diagnóstico observado"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="motivo">Motivo do Encaminhamento:</label>
+                <textarea id="motivo" required placeholder="Descreva detalhadamente o motivo do encaminhamento"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="anamnese">Anamnese:</label>
+                <input type="text" id="anamnese" required placeholder="Digite onde a anamnese foi realizada">
+            </div>
+            
+            <button type="submit">GERAR ENCAMINHAMENTO</button>
+        </form>
+        
+        <div class="result-container" id="resultContainer">
+            <h2>Encaminhamento Psicopedagógico</h2>
+            <div class="result-content" id="resultContent"></div>
+            <button class="print-button" id="printButton">GERAR PDF</button>
+        </div>
+    </div>
+    
+    <script>
+        function getDataHoraAtual() {
+            const agora = new Date();
+            const dia = String(agora.getDate()).padStart(2, '0');
+            const mes = String(agora.getMonth() + 1).padStart(2, '0');
+            const ano = agora.getFullYear();
+            const hora = String(agora.getHours()).padStart(2, '0');
+            const minutos = String(agora.getMinutes()).padStart(2, '0');
+            return `${dia}/${mes}/${ano} às ${hora}h${minutos}min`;
+        }
+
+        document.getElementById('encaminhamentoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('nome').value;
+            const idade = document.getElementById('idade').value;
+            const dataInput = document.getElementById('data').value;
+            const hora = document.getElementById('hora').value;
+            const diagnostico = document.getElementById('diagnostico').value;
+            const motivo = document.getElementById('motivo').value;
+            const anamnese = document.getElementById('anamnese').value;
+
+            const dataObj = new Date(dataInput);
+            const dia = String(dataObj.getDate()).padStart(2, '0');
+            const mes = String(dataObj.getMonth() + 1).padStart(2, '0');
+            const ano = dataObj.getFullYear();
+            const dataFormatada = `${dia}/${mes}/${ano}`;
+            
+            const horaFormatada = hora.split(':').slice(0, 2).join('h') + 'min';
+            const dataImpressao = getDataHoraAtual();
+            
+            const encaminhamentoHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h3>ENCAMINHAMENTO PSICOPEDAGÓGICO</h3>
+                </div>
+                <p><strong>Anamnese:</strong> ${anamnese}</p>
+                <p style="text-align: right;">${dataFormatada}, ${horaFormatada}</p>
+                <p><strong>Paciente:</strong> ${nome}, ${idade} anos</p>
+                <p><strong>Possível Diagnóstico:</strong> ${diagnostico}</p>
+                <p><strong>Motivo do Encaminhamento:</strong></p>
+                <p style="text-align: justify;">${motivo}</p>
+                <div style="margin-top: 50px;">
+                    <div style="float: left; width: 60%;">
+                        <p>_________________________________________</p>
+                        <p>Assinatura do(a) profissional responsável</p>
+                    </div>
+                    <div style="float: right; width: 35%;">
+                        <p>_________________________________________</p>
+                        <p>Carimbo e registro profissional</p>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+                <div style="text-align: center; margin-top: 40px;">
+                    <p>Natalia Cristina Ferreira</p>
+                    <p>PSICOPEDAGOGA CLÍNICA E INSTITUCIONAL</p>
+                    <p>ABPq - 1651</p>
+                </div>
+                <p style="text-align: right; margin-top: 30px;"><em>Data de impressão: ${dataImpressao}</em></p>
+            `;
+            
+            document.getElementById('resultContent').innerHTML = encaminhamentoHTML;
+            document.getElementById('resultContainer').style.display = 'block';
+            document.getElementById('resultContainer').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // PDF geração
+        document.getElementById('printButton').addEventListener('click', function() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+            const dataImpressao = getDataHoraAtual();
+
+            const logoUrl = "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fdcf5cf9-8880-4cb2-934c-4b72c2b49119.png";
+            const img = new Image();
+            img.crossOrigin = "";
+            img.src = logoUrl;
+
+            img.onload = function() {
+                doc.addImage(img, "PNG", 80, 10, 50, 30);
+                doc.setFont("Times", "Bold");
+                doc.setFontSize(16);
+                doc.text("ENCAMINHAMENTO PSICOPEDAGÓGICO", 105, 50, { align: "center" });
+
+                doc.setFont("Times", "Normal");
+                doc.setFontSize(12);
+                let y = 65;
+                const margemEsq = 20;
+
+                const addTexto = (label, valor, quebra = true) => {
+                    doc.setFont("Times", "Bold");
+                    doc.text(label, margemEsq, y);
+                    doc.setFont("Times", "Normal");
+                    if (quebra) {
+                        let textoQuebrado = doc.splitTextToSize(valor, 170);
+                        doc.text(textoQuebrado, margemEsq, y + 6);
+                        y += textoQuebrado.length * 6 + 4;
+                    } else {
+                        doc.text(valor, margemEsq + 30, y);
+                        y += 8;
+                    }
+                };
+
+                addTexto("Anamnese:", document.getElementById("anamnese").value);
+                addTexto("", `${document.getElementById("data").value.split("-").reverse().join("/")}, ${document.getElementById("hora").value}h`, false);
+                addTexto("Paciente:", `${document.getElementById("nome").value}, ${document.getElementById("idade").value} anos`);
+                addTexto("Possível Diagnóstico:", document.getElementById("diagnostico").value);
+                addTexto("Motivo do Encaminhamento:", document.getElementById("motivo").value);
+
+                y += 30;
+                doc.line(margemEsq, y, margemEsq + 80, y);
+                doc.text("Assinatura do(a) profissional responsável", margemEsq, y + 6);
+                doc.line(margemEsq + 110, y, margemEsq + 190, y);
+                doc.text("Carimbo e registro profissional", margemEsq + 110, y + 6);
+
+                y += 25;
+                doc.setFontSize(11);
+                doc.text("Natalia Cristina Ferreira", 105, y + 10, { align: "center" });
+                doc.text("PSICOPEDAGOGA CLÍNICA E INSTITUCIONAL", 105, y + 16, { align: "center" });
+                doc.text("ABPq - 1651", 105, y + 22, { align: "center" });
+
+                y += 20;
+                doc.setFontSize(10);
+                doc.text(`Data de impressão: ${dataImpressao}`, 190, y, { align: "right" });
+
+                doc.save("Encaminhamento_Psicopedagogico.pdf");
+            };
+        });
+
+        // Preenche data/hora atuais no formulário
+        document.addEventListener('DOMContentLoaded', function() {
+            const hoje = new Date();
+            document.getElementById('data').value = hoje.toISOString().split('T')[0];
+            const minutos = Math.round(hoje.getMinutes() / 15) * 15;
+            document.getElementById('hora').value = `${String(hoje.getHours()).padStart(2, '0')}:${String(minutos).padStart(2, '0')}`;
+        });
+    </script>
+</body>
+</html>
