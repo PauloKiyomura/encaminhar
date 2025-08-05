@@ -14,9 +14,17 @@
         
         body {
             background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
             color: #333;
             line-height: 1.6;
             padding: 20px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
         .container {
@@ -68,7 +76,7 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
         
-        input, textarea, select {
+        input, textarea {
             width: 100%;
             padding: 10px;
             border: none;
@@ -79,7 +87,7 @@
             outline: none;
         }
         
-        input:focus, textarea:focus, select:focus {
+        input:focus, textarea:focus {
             background: rgba(255, 255, 255, 0.95);
             box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
         }
@@ -128,7 +136,6 @@
             border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.2);
             display: none;
-            box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
         }
         
         .result-container h2 {
@@ -142,7 +149,6 @@
             background-color: rgba(255, 255, 255, 0.85);
             padding: 20px;
             border-radius: 8px;
-            border: 1px solid rgba(0,0,0,0.1);
             font-family: 'Times New Roman', Times, serif;
             color: #000;
         }
@@ -167,7 +173,7 @@
 <body>
     <div class="container">
         <div class="logo">
-            <img src="imagem.PNG" alt="Logo Clínica Psicopedagógica">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fdcf5cf9-8880-4cb2-934c-4b72c2b49119.png" alt="Logo Clínica Psicopedagógica">
         </div>
         
         <h1>ATENDIMENTO NATALIA FERREIRA</h1>
@@ -197,17 +203,17 @@
             
             <div class="form-group">
                 <label for="diagnostico">Possível Diagnóstico:</label>
-                <textarea id="diagnostico" required placeholder="Descreva o possível diagnóstico observado"></textarea>
+                <textarea id="diagnostico" required></textarea>
             </div>
             
             <div class="form-group">
                 <label for="motivo">Motivo do Encaminhamento:</label>
-                <textarea id="motivo" required placeholder="Descreva detalhadamente o motivo do encaminhamento"></textarea>
+                <textarea id="motivo" required></textarea>
             </div>
 
             <div class="form-group">
                 <label for="anamnese">Anamnese:</label>
-                <input type="text" id="anamnese" required placeholder="Digite onde a anamnese foi realizada">
+                <input type="text" id="anamnese" required>
             </div>
             
             <button type="submit">GERAR ENCAMINHAMENTO</button>
@@ -223,85 +229,67 @@
     <script>
         function getDataHoraAtual() {
             const agora = new Date();
-            const dia = String(agora.getDate()).padStart(2, '0');
-            const mes = String(agora.getMonth() + 1).padStart(2, '0');
-            const ano = agora.getFullYear();
-            const hora = String(agora.getHours()).padStart(2, '0');
-            const minutos = String(agora.getMinutes()).padStart(2, '0');
-            return `${dia}/${mes}/${ano} às ${hora}h${minutos}min`;
+            return `${String(agora.getDate()).padStart(2,'0')}/${String(agora.getMonth()+1).padStart(2,'0')}/${agora.getFullYear()} às ${String(agora.getHours()).padStart(2,'0')}h${String(agora.getMinutes()).padStart(2,'0')}min`;
         }
 
         document.getElementById('encaminhamentoForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const nome = document.getElementById('nome').value;
-            const idade = document.getElementById('idade').value;
-            const dataInput = document.getElementById('data').value;
-            const hora = document.getElementById('hora').value;
-            const diagnostico = document.getElementById('diagnostico').value;
-            const motivo = document.getElementById('motivo').value;
-            const anamnese = document.getElementById('anamnese').value;
-
-            const dataObj = new Date(dataInput);
-            const dia = String(dataObj.getDate()).padStart(2, '0');
-            const mes = String(dataObj.getMonth() + 1).padStart(2, '0');
-            const ano = dataObj.getFullYear();
-            const dataFormatada = `${dia}/${mes}/${ano}`;
-            
-            const horaFormatada = hora.split(':').slice(0, 2).join('h') + 'min';
+            const dataFormatada = document.getElementById('data').value.split('-').reverse().join('/');
+            const horaFormatada = document.getElementById('hora').value.replace(':', 'h') + 'min';
             const dataImpressao = getDataHoraAtual();
             
             const encaminhamentoHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <h3>ENCAMINHAMENTO PSICOPEDAGÓGICO</h3>
-                </div>
-                <p><strong>Anamnese:</strong> ${anamnese}</p>
-                <p style="text-align: right;">${dataFormatada}, ${horaFormatada}</p>
-                <p><strong>Paciente:</strong> ${nome}, ${idade} anos</p>
-                <p><strong>Possível Diagnóstico:</strong> ${diagnostico}</p>
+                <h3 style="text-align:center;">ENCAMINHAMENTO PSICOPEDAGÓGICO</h3>
+                <p><strong>Anamnese:</strong> ${document.getElementById('anamnese').value}</p>
+                <p style="text-align:right;">${dataFormatada}, ${horaFormatada}</p>
+                <p><strong>Paciente:</strong> ${document.getElementById('nome').value}, ${document.getElementById('idade').value} anos</p>
+                <p><strong>Possível Diagnóstico:</strong> ${document.getElementById('diagnostico').value}</p>
                 <p><strong>Motivo do Encaminhamento:</strong></p>
-                <p style="text-align: justify;">${motivo}</p>
-                <div style="margin-top: 50px;">
-                    <div style="float: left; width: 60%;">
+                <p style="text-align:justify;">${document.getElementById('motivo').value}</p>
+                <br><br>
+                <div style="display:flex;justify-content:space-between;">
+                    <div>
                         <p>_________________________________________</p>
                         <p>Assinatura do(a) profissional responsável</p>
                     </div>
-                    <div style="float: right; width: 35%;">
+                    <div>
                         <p>_________________________________________</p>
                         <p>Carimbo e registro profissional</p>
                     </div>
-                    <div style="clear: both;"></div>
                 </div>
-                <div style="text-align: center; margin-top: 40px;">
+                <div style="text-align:center;margin-top:30px;">
                     <p>Natalia Cristina Ferreira</p>
                     <p>PSICOPEDAGOGA CLÍNICA E INSTITUCIONAL</p>
                     <p>ABPq - 1651</p>
                 </div>
-                <p style="text-align: right; margin-top: 30px;"><em>Data de impressão: ${dataImpressao}</em></p>
+                <p style="text-align:right;margin-top:30px;"><em>Data de impressão: ${dataImpressao}</em></p>
             `;
-            
             document.getElementById('resultContent').innerHTML = encaminhamentoHTML;
             document.getElementById('resultContainer').style.display = 'block';
-            document.getElementById('resultContainer').scrollIntoView({ behavior: 'smooth' });
         });
 
-        // PDF geração
         document.getElementById('printButton').addEventListener('click', function() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF({ unit: 'mm', format: 'a4' });
             const dataImpressao = getDataHoraAtual();
-
             const logoUrl = "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fdcf5cf9-8880-4cb2-934c-4b72c2b49119.png";
-            const img = new Image();
-            img.crossOrigin = "";
-            img.src = logoUrl;
 
-            img.onload = function() {
-                doc.addImage(img, "PNG", 80, 10, 50, 30);
+            fetch(logoUrl)
+                .then(res => res.blob())
+                .then(blob => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        doc.addImage(e.target.result, "PNG", 80, 10, 50, 30);
+                        gerarConteudo(doc, dataImpressao);
+                    };
+                    reader.readAsDataURL(blob);
+                })
+                .catch(() => gerarConteudo(doc, dataImpressao));
+
+            function gerarConteudo(doc, dataImpressao) {
                 doc.setFont("Times", "Bold");
                 doc.setFontSize(16);
                 doc.text("ENCAMINHAMENTO PSICOPEDAGÓGICO", 105, 50, { align: "center" });
-
                 doc.setFont("Times", "Normal");
                 doc.setFontSize(12);
                 let y = 65;
@@ -344,10 +332,9 @@
                 doc.text(`Data de impressão: ${dataImpressao}`, 190, y, { align: "right" });
 
                 doc.save("Encaminhamento_Psicopedagogico.pdf");
-            };
+            }
         });
 
-        // Preenche data/hora atuais no formulário
         document.addEventListener('DOMContentLoaded', function() {
             const hoje = new Date();
             document.getElementById('data').value = hoje.toISOString().split('T')[0];
