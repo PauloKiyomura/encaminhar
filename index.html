@@ -248,7 +248,7 @@
                 <p><strong>Motivo do Encaminhamento:</strong></p>
                 <p style="text-align:justify;">${document.getElementById('motivo').value}</p>
                 <br><br>
-                <div style="margin-top:30px;">
+                <div style="margin-top:30px; text-align:center;">
                     <p>_________________________________________</p>
                     <p>Natalia Cristina Ferreira</p>
                     <p>PSICOPEDAGOGA CLÍNICA E INSTITUCIONAL</p>
@@ -305,13 +305,20 @@
                 addTexto("Possível Diagnóstico:", document.getElementById("diagnostico").value);
                 addTexto("Motivo do Encaminhamento:", document.getElementById("motivo").value);
 
+                // Espaço antes da assinatura
                 y += 20;
-                doc.line(margemEsq, y, margemEsq + 80, y);
-                doc.text("Natalia Cristina Ferreira", margemEsq, y + 6);
-                doc.setFontSize(12);
-                doc.text("PSICOPEDAGOGA CLÍNICA E INSTITUCIONAL", margemEsq, y + 12);
-                doc.text("ABPq - 1651", margemEsq, y + 18);
+                const centerX = 105; // centro da página
 
+                // Traço centralizado
+                doc.line(centerX - 40, y, centerX + 40, y);
+
+                // Texto centralizado
+                doc.text("Natalia Cristina Ferreira", centerX, y + 6, { align: "center" });
+                doc.setFontSize(12);
+                doc.text("PSICOPEDAGOGA CLÍNICA E INSTITUCIONAL", centerX, y + 12, { align: "center" });
+                doc.text("ABPq - 1651", centerX, y + 18, { align: "center" });
+
+                // Rodapé
                 doc.setFontSize(10);
                 doc.text(`Data de impressão: ${dataImpressao}`, 105, 290, { align: "center" });
 
