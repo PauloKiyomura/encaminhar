@@ -181,12 +181,12 @@
         <form id="encaminhamentoForm">
             <div class="form-group">
                 <label for="nome">Nome do Paciente:</label>
-                <input type="text" id="nome" required placeholder="Digite o nome completo do paciente">
+                <input type="text" id="nome" required>
             </div>
             
             <div class="form-group">
                 <label for="idade">Idade:</label>
-                <input type="number" id="idade" required min="0" max="120" placeholder="Idade em anos">
+                <input type="number" id="idade" required min="0" max="120">
             </div>
             
             <div class="date-time-group">
@@ -240,29 +240,21 @@
             
             const encaminhamentoHTML = `
                 <h3 style="text-align:center;">ENCAMINHAMENTO PSICOPEDAGÓGICO</h3>
+                <p><strong>Nome:</strong> ${document.getElementById('nome').value}</p>
+                <p><strong>Idade:</strong> ${document.getElementById('idade').value} anos</p>
+                <p><strong>Data e Hora:</strong> ${dataFormatada} - ${horaFormatada}</p>
                 <p><strong>Anamnese:</strong> ${document.getElementById('anamnese').value}</p>
-                <p style="text-align:right;">${dataFormatada}, ${horaFormatada}</p>
-                <p><strong>Paciente:</strong> ${document.getElementById('nome').value}, ${document.getElementById('idade').value} anos</p>
                 <p><strong>Possível Diagnóstico:</strong> ${document.getElementById('diagnostico').value}</p>
                 <p><strong>Motivo do Encaminhamento:</strong></p>
                 <p style="text-align:justify;">${document.getElementById('motivo').value}</p>
                 <br><br>
-                <div style="display:flex;justify-content:space-between;">
-                    <div>
-                        <p>_________________________________________</p>
-                        <p>Assinatura do(a) profissional responsável</p>
-                    </div>
-                    <div>
-                        <p>_________________________________________</p>
-                        <p>Carimbo e registro profissional</p>
-                    </div>
-                </div>
-                <div style="text-align:center;margin-top:30px;">
+                <div style="margin-top:30px;">
+                    <p>_________________________________________</p>
                     <p>Natalia Cristina Ferreira</p>
                     <p>PSICOPEDAGOGA CLÍNICA E INSTITUCIONAL</p>
                     <p>ABPq - 1651</p>
                 </div>
-                <p style="text-align:right;margin-top:30px;"><em>Data de impressão: ${dataImpressao}</em></p>
+                <p style="text-align:center;margin-top:40px;"><em>Data de impressão: ${dataImpressao}</em></p>
             `;
             document.getElementById('resultContent').innerHTML = encaminhamentoHTML;
             document.getElementById('resultContainer').style.display = 'block';
@@ -279,7 +271,7 @@
                 .then(blob => {
                     const reader = new FileReader();
                     reader.onload = function(e) {
-                        doc.addImage(e.target.result, "PNG", 80, 10, 50, 30);
+                        doc.addImage(e.target.result, "PNG", 80, 5, 50, 25);
                         gerarConteudo(doc, dataImpressao);
                     };
                     reader.readAsDataURL(blob);
@@ -288,48 +280,40 @@
 
             function gerarConteudo(doc, dataImpressao) {
                 doc.setFont("Times", "Bold");
-                doc.setFontSize(16);
-                doc.text("ENCAMINHAMENTO PSICOPEDAGÓGICO", 105, 50, { align: "center" });
-                doc.setFont("Times", "Normal");
-                doc.setFontSize(12);
-                let y = 65;
-                const margemEsq = 20;
+                doc.setFontSize(18);
+                doc.text("ENCAMINHAMENTO PSICOPEDAGÓGICO", 105, 38, { align: "center" });
 
-                const addTexto = (label, valor, quebra = true) => {
+                doc.setFont("Times", "Normal");
+                doc.setFontSize(14);
+                let y = 50;
+                const margemEsq = 20;
+                const larguraTexto = 170;
+
+                const addTexto = (label, valor) => {
                     doc.setFont("Times", "Bold");
                     doc.text(label, margemEsq, y);
                     doc.setFont("Times", "Normal");
-                    if (quebra) {
-                        let textoQuebrado = doc.splitTextToSize(valor, 170);
-                        doc.text(textoQuebrado, margemEsq, y + 6);
-                        y += textoQuebrado.length * 6 + 4;
-                    } else {
-                        doc.text(valor, margemEsq + 30, y);
-                        y += 8;
-                    }
+                    let textoQuebrado = doc.splitTextToSize(valor, larguraTexto);
+                    doc.text(textoQuebrado, margemEsq, y + 6, { align: "justify" });
+                    y += textoQuebrado.length * 7 + 6;
                 };
 
+                addTexto("Nome:", document.getElementById("nome").value);
+                addTexto("Idade:", `${document.getElementById("idade").value} anos`);
+                addTexto("Data e Hora:", `${document.getElementById("data").value.split("-").reverse().join("/")} - ${document.getElementById("hora").value}h`);
                 addTexto("Anamnese:", document.getElementById("anamnese").value);
-                addTexto("", `${document.getElementById("data").value.split("-").reverse().join("/")}, ${document.getElementById("hora").value}h`, false);
-                addTexto("Paciente:", `${document.getElementById("nome").value}, ${document.getElementById("idade").value} anos`);
                 addTexto("Possível Diagnóstico:", document.getElementById("diagnostico").value);
                 addTexto("Motivo do Encaminhamento:", document.getElementById("motivo").value);
 
-                y += 30;
-                doc.line(margemEsq, y, margemEsq + 80, y);
-                doc.text("Assinatura do(a) profissional responsável", margemEsq, y + 6);
-                doc.line(margemEsq + 110, y, margemEsq + 190, y);
-                doc.text("Carimbo e registro profissional", margemEsq + 110, y + 6);
-
-                y += 25;
-                doc.setFontSize(11);
-                doc.text("Natalia Cristina Ferreira", 105, y + 10, { align: "center" });
-                doc.text("PSICOPEDAGOGA CLÍNICA E INSTITUCIONAL", 105, y + 16, { align: "center" });
-                doc.text("ABPq - 1651", 105, y + 22, { align: "center" });
-
                 y += 20;
+                doc.line(margemEsq, y, margemEsq + 80, y);
+                doc.text("Natalia Cristina Ferreira", margemEsq, y + 6);
+                doc.setFontSize(12);
+                doc.text("PSICOPEDAGOGA CLÍNICA E INSTITUCIONAL", margemEsq, y + 12);
+                doc.text("ABPq - 1651", margemEsq, y + 18);
+
                 doc.setFontSize(10);
-                doc.text(`Data de impressão: ${dataImpressao}`, 190, y, { align: "right" });
+                doc.text(`Data de impressão: ${dataImpressao}`, 105, 290, { align: "center" });
 
                 doc.save("Encaminhamento_Psicopedagogico.pdf");
             }
