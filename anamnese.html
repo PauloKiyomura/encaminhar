@@ -21,6 +21,7 @@
 
     .container {
       max-width: 900px;
+      width: 100%;
       margin: 0 auto;
       background: rgba(0, 0, 0, 0.25);
       backdrop-filter: blur(12px);
@@ -77,10 +78,11 @@
       cursor: pointer;
       display: block;
       width: 100%;
-      margin-top: 30px;
+      margin-top: 20px;
       font-weight: 600;
       letter-spacing: 1px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.2s ease-in-out;
     }
 
     button:hover {
@@ -94,6 +96,21 @@
 
     .back-button:hover {
       background-color: #444;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+
+      input, textarea {
+        font-size: 15px;
+      }
+
+      button {
+        font-size: 15px;
+        padding: 10px 16px;
+      }
     }
   </style>
 
@@ -150,26 +167,41 @@
       const margem = 20;
       let y = 20;
 
+      const novaPaginaSeNecessario = () => {
+        if (y > 260) {
+          doc.addPage();
+          y = 20;
+        }
+      };
+
       const addTitulo = (texto) => {
+        novaPaginaSeNecessario();
         doc.setFontSize(13);
         doc.setFont("Times", "Bold");
         doc.text(texto, 105, y, { align: "center" });
         doc.setFont("Times", "Normal");
         doc.setFontSize(11);
-        y += 8;
+        y += 10;
       };
 
       const addCampo = (label, valor) => {
+        novaPaginaSeNecessario();
         doc.setFont("Times", "Bold");
         doc.text(`${label}`, margem, y);
         y += 5;
-        doc.setFont("Times", "Normal");
+
         const texto = doc.splitTextToSize(valor, 170);
-        doc.text(texto, margem, y);
-        y += texto.length * 5 + 2;
+        for (let i = 0; i < texto.length; i++) {
+          novaPaginaSeNecessario();
+          doc.setFont("Times", "Normal");
+          doc.text(texto[i], margem, y);
+          y += 5;
+        }
+        y += 6; // espaço extra entre campos
       };
 
       addTitulo("ANAMNESE PSICOPEDAGÓGICA");
+      y += 2;
 
       addTitulo("1. IDENTIFICAÇÃO");
       addCampo("Nome da Criança:", document.getElementById("nome").value);
@@ -192,11 +224,15 @@
       addCampo("Dificuldades de Aprendizagem:", document.getElementById("dificuldade_aprendizagem").value);
       addCampo("Adequações Escolares:", document.getElementById("adequacoes").value);
 
-      // Assinatura no final da página
-      y = 265;
+      // Garantir que a assinatura vá para a última página
+      if (y > 230) {
+        doc.addPage();
+        y = 20;
+      }
+
       doc.setDrawColor(0);
-      doc.line(75, y, 135, y); // linha para assinatura
-      y += 6;
+      doc.line(75, 265, 135, 265); // linha para assinatura
+      y = 271;
       doc.setFontSize(12);
       doc.setFont("Times", "Bold");
       doc.text("NATALIA CRISTINA FERREIRA", 105, y, { align: "center" }); 
