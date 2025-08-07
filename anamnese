@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="shortcut icon" href="flor.ico" type="image/x-icon" />
+  <title>Anamnese Psicopedagógica</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #000000 0%, #00193b 100%);
+      color: #fff;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(12px);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-section {
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      background: rgba(255, 255, 255, 0.7);
+      outline: none;
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      margin-top: 30px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    button:hover {
+      background-color: #2980b9;
+      transform: scale(1.03);
+    }
+
+    .back-button {
+      background-color: #555;
+    }
+
+    .back-button:hover {
+      background-color: #444;
+    }
+  </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>ANAMNESE PSICOPEDAGÓGICA<br>ATENDIMENTO PARA CRIANÇAS ESPECIAIS</h1>
+
+    <form id="anamneseForm">
+      <div class="form-section">
+        <h2>1. IDENTIFICAÇÃO</h2>
+        <div class="form-group"><label>Nome da Criança:</label><input type="text" id="nome" required></div>
+        <div class="form-group"><label>Data de Nascimento:</label><input type="text" id="nascimento" placeholder="dd/mm/aaaa" required></div>
+        <div class="form-group"><label>Instituição de Ensino:</label><input type="text" id="escola" required></div>
+        <div class="form-group"><label>Responsável:</label><input type="text" id="responsavel" required></div>
+      </div>
+
+      <div class="form-section">
+        <h2>2. DIAGNÓSTICO/CONDIÇÃO ESPECIAL</h2>
+        <div class="form-group"><label>Diagnóstico(s):</label><input type="text" id="diagnostico" required></div>
+        <div class="form-group"><label>Data do diagnóstico:</label><input type="text" id="data_diagnostico" placeholder="dd/mm/aaaa" required></div>
+        <div class="form-group"><label>Tratamentos em andamento:</label><textarea id="tratamentos" required></textarea></div>
+      </div>
+
+      <div class="form-section">
+        <h2>3. DESENVOLVIMENTO</h2>
+        <div class="form-group"><label>Marcos do desenvolvimento:</label><textarea id="marcos" required></textarea></div>
+        <div class="form-group"><label>Dificuldades:</label><textarea id="dificuldades" required></textarea></div>
+        <div class="form-group"><label>Habilidades preservadas:</label><textarea id="habilidades" required></textarea></div>
+      </div>
+
+      <div class="form-section">
+        <h2>4. ESCOLA E APRENDIZAGEM</h2>
+        <div class="form-group"><label>Adaptação escolar:</label><textarea id="adaptacao" required></textarea></div>
+        <div class="form-group"><label>Dificuldades de aprendizagem:</label><textarea id="dificuldade_aprendizagem" required></textarea></div>
+        <div class="form-group"><label>Adequações escolares:</label><textarea id="adequacoes" required></textarea></div>
+      </div>
+
+      <button type="submit">SALVAR ANAMNESE</button>
+      <button type="button" class="back-button" onclick="window.location.href='encaminhamento.html'">VOLTAR PARA ENCAMINHAMENTO</button>
+    </form>
+  </div>
+
+  <script>
+    const { jsPDF } = window.jspdf;
+
+    document.getElementById('anamneseForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const doc = new jsPDF({ unit: "mm", format: "a4" });
+      doc.setFont("Times", "Normal");
+      doc.setFontSize(14);
+      const margem = 20;
+      let y = 30;
+
+      const addTitulo = (texto) => {
+        doc.setFontSize(16);
+        doc.setFont("Times", "Bold");
+        doc.text(texto, 105, y, { align: "center" });
+        doc.setFont("Times", "Normal");
+        doc.setFontSize(14);
+        y += 10;
+      };
+
+      const addCampo = (label, valor) => {
+        doc.setFont("Times", "Bold");
+        doc.text(`${label}`, margem, y);
+        y += 7;
+        doc.setFont("Times", "Normal");
+        const texto = doc.splitTextToSize(valor, 170);
+        doc.text(texto, margem, y);
+        y += texto.length * 7 + 3;
+      };
+
+      addTitulo("ANAMNESE PSICOPEDAGÓGICA");
+
+      addTitulo("1. IDENTIFICAÇÃO");
+      addCampo("Nome da Criança:", document.getElementById("nome").value);
+      addCampo("Data de Nascimento:", document.getElementById("nascimento").value);
+      addCampo("Instituição de Ensino:", document.getElementById("escola").value);
+      addCampo("Responsável:", document.getElementById("responsavel").value);
+
+      addTitulo("2. DIAGNÓSTICO/CONDIÇÃO ESPECIAL");
+      addCampo("Diagnóstico(s):", document.getElementById("diagnostico").value);
+      addCampo("Data do Diagnóstico:", document.getElementById("data_diagnostico").value);
+      addCampo("Tratamentos em Andamento:", document.getElementById("tratamentos").value);
+
+      addTitulo("3. DESENVOLVIMENTO");
+      addCampo("Marcos do Desenvolvimento:", document.getElementById("marcos").value);
+      addCampo("Dificuldades:", document.getElementById("dificuldades").value);
+      addCampo("Habilidades Preservadas:", document.getElementById("habilidades").value);
+
+      addTitulo("4. ESCOLA E APRENDIZAGEM");
+      addCampo("Adaptação Escolar:", document.getElementById("adaptacao").value);
+      addCampo("Dificuldades de Aprendizagem:", document.getElementById("dificuldade_aprendizagem").value);
+      addCampo("Adequações Escolares:", document.getElementById("adequacoes").value);
+
+
+      y += 20;
+      doc.line(65, y, 145, y); y += 7;
+      doc.setFontSize(12);
+      doc.text("Natalia Cristina Ferreira", 105, y, { align: "center" }); y += 6;
+      doc.text("PSICOPEDAGOGA CLÍNICA E INSTITUCIONAL", 105, y, { align: "center" }); y += 5;
+      doc.text("ABPq - 1651", 105, y, { align: "center" });
+
+      doc.save("Anamnese_Psicopedagogica.pdf");
+    });
+  </script>
+</body>
+</html>
