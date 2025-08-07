@@ -1,108 +1,124 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="flor.ico" type="image/x-icon" />
-    <title>Tela Inicial</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tela Inicial - Atendimento Natalia Ferreira</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
 
-        body {
-            height: 100vh;
-            background: linear-gradient(135deg, #000000 0%, #00193b 100%);
-            background-size: 400% 400%;
-            animation: gradientBG 10s ease infinite;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            transition: opacity 0.8s ease;
-        }
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #000000 0%, #002a64 100%);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      transition: opacity 0.8s ease;
+    }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 40px 60px;
-            border-radius: 16px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-            animation: fadeIn 1s ease;
-        }
+    .container {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.15);
+      padding: 40px 60px;
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      animation: fadeIn 1s ease;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
 
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
-        }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
 
-        .logo {
-            margin-bottom: 20px;
-        }
+    .logo {
+      margin-bottom: 20px;
+    }
 
-        .logo img {
-            max-width: 150px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
-        }
+    .logo img {
+      max-width: 150px;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+    }
 
-        button {
-            background-color: #000000;
-            color: white;
-            border: none;
-            padding: 14px 30px;
-            font-size: 18px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-        }
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 30px;
+    }
 
-        button:hover {
-            background-color: #00193b;
-            transform: scale(1.05);
-            box-shadow: 0 6px 14px rgba(0,0,0,0.3);
-        }
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
 
-        /* Efeito de fade-out na transição */
-        .fade-out {
-            opacity: 0;
-        }
-    </style>
+    button:hover {
+      background-color: #003354;
+      transform: scale(1.05);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+    }
+
+    .fade-out {
+      opacity: 0;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
-            <img src="imagem.PNG" alt="Logo Natalia Ferreira">
-        </div>
-        <h1>Atendimento Psicopedagógico</h1>
-        <button id="startBtn">COMEÇAR</button>
+  <div class="container">
+    <div class="logo">
+      <img src="imagem.PNG" alt="Logo Natalia Ferreira">
     </div>
+    <h1>Atendimento Psicopedagógico</h1>
+    <div class="buttons">
+      <button id="startBtn">COMEÇAR</button>
+      <button id="anamneseBtn">ANAMNESE</button>
+    </div>
+  </div>
 
-    <script>
-        document.getElementById("startBtn").addEventListener("click", () => {
-            document.body.classList.add("fade-out");
-            setTimeout(() => {
-                window.location.href = "atendimento.html";
-            }, 800);
-        });
-    </script>
+  <script>
+    const delayAndRedirect = (url) => {
+      document.body.classList.add("fade-out");
+      setTimeout(() => {
+        window.location.href = url;
+      }, 800);
+    };
+
+    document.getElementById("startBtn").addEventListener("click", () => {
+      delayAndRedirect("atendimento.html");
+    });
+
+    document.getElementById("anamneseBtn").addEventListener("click", () => {
+      delayAndRedirect("anamnese.html");
+    });
+  </script>
 </body>
 </html>
