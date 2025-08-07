@@ -133,12 +133,6 @@
         <div class="form-group"><label>Adequações escolares:</label><textarea id="adequacoes" required></textarea></div>
       </div>
 
-      <div class="form-section">
-        <h2>5. OBJETIVOS DA AVALIAÇÃO</h2>
-        <div class="form-group"><label>Expectativas da família:</label><textarea id="expectativas" required></textarea></div>
-        <div class="form-group"><label>Queixas escolares:</label><textarea id="queixas" required></textarea></div>
-      </div>
-
       <button type="submit">SALVAR ANAMNESE</button>
       <button type="button" class="back-button" onclick="window.location.href='encaminhamento.html'">VOLTAR PARA ENCAMINHAMENTO</button>
     </form>
@@ -197,10 +191,6 @@
       addCampo("Adaptação Escolar:", document.getElementById("adaptacao").value);
       addCampo("Dificuldades de Aprendizagem:", document.getElementById("dificuldade_aprendizagem").value);
       addCampo("Adequações Escolares:", document.getElementById("adequacoes").value);
-
-      addTitulo("5. OBJETIVOS DA AVALIAÇÃO");
-      addCampo("Expectativas da Família:", document.getElementById("expectativas").value);
-      addCampo("Queixas Escolares:", document.getElementById("queixas").value);
 
       // Assinatura no final da página
       y = 265;
