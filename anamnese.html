@@ -21,7 +21,6 @@
 
     .container {
       max-width: 900px;
-      width: 100%;
       margin: 0 auto;
       background: rgba(0, 0, 0, 0.25);
       backdrop-filter: blur(12px);
@@ -53,7 +52,7 @@
       color: #fff;
     }
 
-    input, textarea {
+    input, textarea, select {
       width: 100%;
       padding: 10px;
       border: none;
@@ -63,9 +62,18 @@
       outline: none;
     }
 
+    input[type="checkbox"] {
+      width: auto;
+      margin-right: 10px;
+    }
+
     textarea {
       min-height: 80px;
       resize: vertical;
+    }
+
+    .checkbox-group {
+      margin-bottom: 10px;
     }
 
     button {
@@ -78,11 +86,10 @@
       cursor: pointer;
       display: block;
       width: 100%;
-      margin-top: 20px;
+      margin-top: 30px;
       font-weight: 600;
       letter-spacing: 1px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      transition: all 0.2s ease-in-out;
     }
 
     button:hover {
@@ -97,23 +104,7 @@
     .back-button:hover {
       background-color: #444;
     }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 20px;
-      }
-
-      input, textarea {
-        font-size: 15px;
-      }
-
-      button {
-        font-size: 15px;
-        padding: 10px 16px;
-      }
-    }
   </style>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
@@ -125,126 +116,179 @@
         <h2>1. IDENTIFICAÇÃO</h2>
         <div class="form-group"><label>Nome da Criança:</label><input type="text" id="nome" required></div>
         <div class="form-group"><label>Data de Nascimento:</label><input type="text" id="nascimento" placeholder="dd/mm/aaaa" required></div>
+        <div class="form-group"><label>Idade:</label><input type="number" id="idade_crianca" required></div>
+        <div class="form-group"><label>Endereço:</label><input type="text" id="endereco" required></div>
+        <div class="form-group"><label>Bairro:</label><input type="text" id="bairro" required></div>
         <div class="form-group"><label>Instituição de Ensino:</label><input type="text" id="escola" required></div>
-        <div class="form-group"><label>Responsável:</label><input type="text" id="responsavel" required></div>
       </div>
 
       <div class="form-section">
-        <h2>2. DIAGNÓSTICO/CONDIÇÃO ESPECIAL</h2>
-        <div class="form-group"><label>Diagnóstico(s):</label><input type="text" id="diagnostico" required></div>
-        <div class="form-group"><label>Data do diagnóstico:</label><input type="text" id="data_diagnostico" placeholder="dd/mm/aaaa" required></div>
-        <div class="form-group"><label>Tratamentos em andamento:</label><textarea id="tratamentos" required></textarea></div>
+        <h2>2. DADOS DOS RESPONSÁVEIS</h2>
+        <div class="form-group"><label>Responsável 1:</label><input type="text" id="resp1" required></div>
+        <div class="form-group"><label>Idade:</label><input type="number" id="idade1" required></div>
+        <div class="form-group"><label>Escolaridade:</label><input type="text" id="escolaridade1" required></div>
+        <div class="form-group"><label>Profissão:</label><input type="text" id="profissao1" required></div>
+        <div class="form-group"><label>Responsável 2:</label><input type="text" id="resp2"></div>
+        <div class="form-group"><label>Idade:</label><input type="number" id="idade2"></div>
+        <div class="form-group"><label>Escolaridade:</label><input type="text" id="escolaridade2"></div>
+        <div class="form-group"><label>Profissão:</label><input type="text" id="profissao2"></div>
+        <div class="form-group"><label>Genitora:</label><input type="text" id="genitora"></div>
+        <div class="form-group"><label>Histórico de outras gestações:</label><input type="text" id="gestacoes"></div>
+        <div class="form-group"><label>Partos:</label><input type="number" id="partos"></div>
+        <div class="form-group"><label>Abortos:</label><input type="number" id="abortos"></div>
+      </div>
+            <div class="form-section">
+        <h2>II - ETAPA DE ESCOLARIZAÇÃO</h2>
+
+        <div class="checkbox-group">
+          <label><input type="checkbox" id="ef1_1"> Ensino Fundamental - Fase I: 1º ano</label>
+          <label><input type="checkbox" id="ef1_2"> 2º ano</label>
+          <label><input type="checkbox" id="ef1_3"> 3º ano</label>
+          <label><input type="checkbox" id="ef1_4"> 4º ano</label>
+          <label><input type="checkbox" id="ef1_5"> 5º ano</label>
+        </div>
+
+        <div class="checkbox-group">
+          <label><input type="checkbox" id="ef2"> Ensino Fundamental - Fase II</label>
+        </div>
+
+        <div class="checkbox-group">
+          <label><input type="checkbox" id="socioeducacional"> Programa Socioeducacional</label>
+          <input type="text" id="anoSocioeducacional" placeholder="Ano (se aplicável)">
+        </div>
+
+        <div class="checkbox-group">
+          <label><input type="checkbox" id="espTrabalho"> Educação Especial para o Trabalho</label>
+        </div>
+
+        <div class="form-group">
+          <label>Turma:</label>
+          <input type="text" id="turma">
+        </div>
+        <div class="form-group">
+          <label>Turno:</label>
+          <input type="text" id="turno">
+        </div>
       </div>
 
       <div class="form-section">
-        <h2>3. DESENVOLVIMENTO</h2>
-        <div class="form-group"><label>Marcos do desenvolvimento:</label><textarea id="marcos" required></textarea></div>
-        <div class="form-group"><label>Dificuldades:</label><textarea id="dificuldades" required></textarea></div>
-        <div class="form-group"><label>Habilidades preservadas:</label><textarea id="habilidades" required></textarea></div>
+        <h2>III - DEFICIÊNCIA</h2>
+
+        <div class="checkbox-group">
+          <label><input type="checkbox" id="def_intelectual"> Deficiência Intelectual</label>
+          <label><input type="checkbox" id="intermitente"> Intermitente</label>
+          <label><input type="checkbox" id="limitado"> Limitado</label>
+          <label><input type="checkbox" id="extensivo"> Extensivo</label>
+          <label><input type="checkbox" id="permanente"> Permanente</label>
+        </div>
+
+        <div class="checkbox-group">
+          <label><input type="checkbox" id="def_multipla"> Deficiência Múltipla</label>
+          <input type="text" id="detalheMultipla" placeholder="Especifique">
+        </div>
+
+        <div class="checkbox-group">
+          <label><input type="checkbox" id="tea"> Transtorno do Espectro Autista (TEA)</label>
+          <label><input type="checkbox" id="nivel1"> Nível I</label>
+          <label><input type="checkbox" id="nivel2"> Nível II</label>
+          <label><input type="checkbox" id="nivel3"> Nível III</label>
+        </div>
       </div>
 
-      <div class="form-section">
-        <h2>4. ESCOLA E APRENDIZAGEM</h2>
-        <div class="form-group"><label>Adaptação escolar:</label><textarea id="adaptacao" required></textarea></div>
-        <div class="form-group"><label>Dificuldades de aprendizagem:</label><textarea id="dificuldade_aprendizagem" required></textarea></div>
-        <div class="form-group"><label>Adequações escolares:</label><textarea id="adequacoes" required></textarea></div>
-      </div>
-
-      <button type="submit">SALVAR ANAMNESE</button>
-      <button type="button" class="back-button" onclick="window.location.href='encaminhamento.html'">VOLTAR PARA ENCAMINHAMENTO</button>
+      <button type="button" onclick="gerarPDF()">Salvar Anamnese (PDF)</button>
     </form>
   </div>
 
   <script>
-    const { jsPDF } = window.jspdf;
+    function gerarPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
 
-    document.getElementById('anamneseForm').addEventListener('submit', function (e) {
-      e.preventDefault();
+  let y = 20;
+  const linha = (texto, espacamento = 10) => {
+    doc.text(texto, 20, y);
+    y += espacamento;
+  };
 
-      const doc = new jsPDF({ unit: "mm", format: "a4" });
-      doc.setFont("Times", "Normal");
-      doc.setFontSize(11);
-      const margem = 20;
-      let y = 20;
+  const get = (id) => document.getElementById(id)?.value || '';
+  const check = (id) => document.getElementById(id)?.checked;
 
-      const novaPaginaSeNecessario = () => {
-        if (y > 260) {
-          doc.addPage();
-          y = 20;
-        }
-      };
+  doc.setFontSize(14);
+  doc.text('ANAMNESE PSICOPEDAGÓGICA', 105, y, { align: 'center' });
+  y += 10;
+  doc.text('ATENDIMENTO PARA CRIANÇAS ESPECIAIS', 105, y, { align: 'center' });
+  y += 15;
 
-      const addTitulo = (texto) => {
-        novaPaginaSeNecessario();
-        doc.setFontSize(13);
-        doc.setFont("Times", "Bold");
-        doc.text(texto, 105, y, { align: "center" });
-        doc.setFont("Times", "Normal");
-        doc.setFontSize(11);
-        y += 10;
-      };
+  doc.setFontSize(12);
+  linha(`Nome: ${get('nome')}`);
+  linha(`Data de Nascimento: ${get('nascimento')}`);
+  linha(`Idade: ${get('idade_crianca')}`);
+  linha(`Endereço: ${get('endereco')}`);
+  linha(`Bairro: ${get('bairro')}`);
+  linha(`Instituição de Ensino: ${get('escola')}`);
 
-      const addCampo = (label, valor) => {
-        novaPaginaSeNecessario();
-        doc.setFont("Times", "Bold");
-        doc.text(`${label}`, margem, y);
-        y += 5;
+  linha('');
+  linha('Responsável 1: ' + get('resp1'));
+  linha('Idade: ' + get('idade1'));
+  linha('Escolaridade: ' + get('escolaridade1'));
+  linha('Profissão: ' + get('profissao1'));
+  linha('Responsável 2: ' + get('resp2'));
+  linha('Idade: ' + get('idade2'));
+  linha('Escolaridade: ' + get('escolaridade2'));
+  linha('Profissão: ' + get('profissao2'));
+  linha('Genitora: ' + get('genitora'));
+  linha('Histórico de gestações: ' + get('gestacoes'));
+  linha('Partos: ' + get('partos'));
+  linha('Abortos: ' + get('abortos'));
 
-        const texto = doc.splitTextToSize(valor, 170);
-        for (let i = 0; i < texto.length; i++) {
-          novaPaginaSeNecessario();
-          doc.setFont("Times", "Normal");
-          doc.text(texto[i], margem, y);
-          y += 5;
-        }
-        y += 6; // espaço extra entre campos
-      };
+  // ETAPA DE ESCOLARIZAÇÃO
+  linha('');
+  linha('ETAPA DE ESCOLARIZAÇÃO');
+  if (check('ef1_1')) linha('• 1º ano');
+  if (check('ef1_2')) linha('• 2º ano');
+  if (check('ef1_3')) linha('• 3º ano');
+  if (check('ef1_4')) linha('• 4º ano');
+  if (check('ef1_5')) linha('• 5º ano');
+  if (check('ef2')) linha('• Ensino Fundamental - Fase II');
+  if (check('socioeducacional')) linha(`• Programa Socioeducacional - Ano: ${get('anoSocioeducacional')}`);
+  if (check('espTrabalho')) linha('• Educação Especial para o Trabalho');
+  if (get('turma')) linha('Turma: ' + get('turma'));
+  if (get('turno')) linha('Turno: ' + get('turno'));
 
-      addTitulo("ANAMNESE PSICOPEDAGÓGICA");
-      y += 2;
+  // DEFICIÊNCIAS
+  linha('');
+  linha('DEFICIÊNCIA');
+  if (check('def_intelectual')) {
+    linha('• Deficiência Intelectual');
+    if (check('intermitente')) linha('  - Intermitente');
+    if (check('limitado')) linha('  - Limitado');
+    if (check('extensivo')) linha('  - Extensivo');
+    if (check('permanente')) linha('  - Permanente');
+  }
+  if (check('def_multipla')) linha('• Deficiência Múltipla: ' + get('detalheMultipla'));
+  if (check('tea')) {
+    linha('• Transtorno do Espectro Autista');
+    if (check('nivel1')) linha('  - Nível I');
+    if (check('nivel2')) linha('  - Nível II');
+    if (check('nivel3')) linha('  - Nível III');
+  }
 
-      addTitulo("1. IDENTIFICAÇÃO");
-      addCampo("Nome da Criança:", document.getElementById("nome").value);
-      addCampo("Data de Nascimento:", document.getElementById("nascimento").value);
-      addCampo("Instituição de Ensino:", document.getElementById("escola").value);
-      addCampo("Responsável:", document.getElementById("responsavel").value);
+  // Assinatura centralizada
+  y += 20;
+  if (y > 250) {
+    doc.addPage();
+    y = 20;
+  }
 
-      addTitulo("2. DIAGNÓSTICO/CONDIÇÃO ESPECIAL");
-      addCampo("Diagnóstico(s):", document.getElementById("diagnostico").value);
-      addCampo("Data do Diagnóstico:", document.getElementById("data_diagnostico").value);
-      addCampo("Tratamentos em Andamento:", document.getElementById("tratamentos").value);
+  doc.setFontSize(12);
+  doc.text('_________________________________________', 105, y, { align: 'center' });
+  y += 7;
+  doc.text('Natalia Cristina Ferreira', 105, y, { align: 'center' });
+  y += 6;
+  doc.text('CRP 06/176304 - Psicopedagogia', 105, y, { align: 'center' });
 
-      addTitulo("3. DESENVOLVIMENTO");
-      addCampo("Marcos do Desenvolvimento:", document.getElementById("marcos").value);
-      addCampo("Dificuldades:", document.getElementById("dificuldades").value);
-      addCampo("Habilidades Preservadas:", document.getElementById("habilidades").value);
-
-      addTitulo("4. ESCOLA E APRENDIZAGEM");
-      addCampo("Adaptação Escolar:", document.getElementById("adaptacao").value);
-      addCampo("Dificuldades de Aprendizagem:", document.getElementById("dificuldade_aprendizagem").value);
-      addCampo("Adequações Escolares:", document.getElementById("adequacoes").value);
-
-      // Garantir que a assinatura vá para a última página
-      if (y > 230) {
-        doc.addPage();
-        y = 20;
-      }
-
-      doc.setDrawColor(0);
-      doc.line(75, 265, 135, 265); // linha para assinatura
-      y = 271;
-      doc.setFontSize(12);
-      doc.setFont("Times", "Bold");
-      doc.text("NATALIA CRISTINA FERREIRA", 105, y, { align: "center" }); 
-      y += 5;
-      doc.setFontSize(11);
-      doc.setFont("Times", "Normal");
-      doc.text("PSICOPEDAGOGA CLÍNICA E INSTITUCIONAL", 105, y, { align: "center" }); 
-      y += 5;
-      doc.text("ABPq - 1651", 105, y, { align: "center" });
-
-      doc.save("Anamnese_Psicopedagogica.pdf");
-    });
+  doc.save('anamnese.pdf');
+}
   </script>
 </body>
 </html>
