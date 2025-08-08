@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Anamnese Psicopedagógica</title>
   <style>
     * {
@@ -30,7 +31,8 @@
       border: 1px solid rgba(255, 255, 255, 0.18);
     }
 
-    h1, h2 {
+    h1,
+    h2 {
       text-align: center;
       margin-bottom: 20px;
       color: #fff;
@@ -52,7 +54,9 @@
       color: #fff;
     }
 
-    input, textarea, select {
+    input,
+    textarea,
+    select {
       width: 100%;
       padding: 10px;
       border: none;
@@ -104,18 +108,42 @@
     .back-button:hover {
       background-color: #444;
     }
+
+    .expand-title {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin-bottom: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .expand-title:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .expand-title::after {
+      content: '+';
+      font-size: 20px;
+      transition: transform 0.3s ease;
+    }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
+
 <body>
   <div class="container">
-    <h1>ANAMNESE PSICOPEDAGÓGICA<br>ATENDIMENTO PARA CRIANÇAS ESPECIAIS</h1>
+    <h1>ANAMNESE PSICOPEDAGÓGICA</h1>
 
     <form id="anamneseForm">
       <div class="form-section">
         <h2>1. IDENTIFICAÇÃO</h2>
         <div class="form-group"><label>Nome da Criança:</label><input type="text" id="nome" required></div>
-        <div class="form-group"><label>Data de Nascimento:</label><input type="text" id="nascimento" placeholder="dd/mm/aaaa" required></div>
+        <div class="form-group"><label>Data de Nascimento:</label><input type="text" id="nascimento"
+            placeholder="dd/mm/aaaa" required></div>
         <div class="form-group"><label>Idade:</label><input type="number" id="idade_crianca" required></div>
         <div class="form-group"><label>Endereço:</label><input type="text" id="endereco" required></div>
         <div class="form-group"><label>Bairro:</label><input type="text" id="bairro" required></div>
@@ -137,7 +165,7 @@
         <div class="form-group"><label>Partos:</label><input type="number" id="partos"></div>
         <div class="form-group"><label>Abortos:</label><input type="number" id="abortos"></div>
       </div>
-            <div class="form-section">
+      <div class="form-section">
         <h2>II - ETAPA DE ESCOLARIZAÇÃO</h2>
 
         <div class="checkbox-group">
@@ -174,39 +202,45 @@
       <div class="form-section">
         <h2>III - DEFICIÊNCIA</h2>
 
-        <!-- Deficiência Intelectual -->
-<div class="checkbox-group">
-  <label><input type="checkbox" id="def_intelectual" onchange="toggleGrupo('grupoIntelectual')"> Deficiência Intelectual</label>
-  <div id="grupoIntelectual" style="display:none; margin-left:20px;">
-    <label><input type="checkbox" id="leve"> Leve</label>
-    <label><input type="checkbox" id="moderado"> Moderado</label>
-    <label><input type="checkbox" id="grave"> Grave</label>
-    <label><input type="checkbox" id="severo"> Severo</label>
-  </div>
-</div>
+        <button type="button" class="expand-title" onclick="toggleExpand('intelectual')">
+          Deficiência Intelectual
+        </button>
+        <div id="intelectualContent" class="expand-content" style="display: none;">
+          <div style="margin-left: 20px; display: flex; flex-direction: column; gap: 8px; padding-top: 8px;">
+            <label><input type="checkbox" id="leve"> Leve</label>
+            <label><input type="checkbox" id="moderado"> Moderado</label>
+            <label><input type="checkbox" id="grave"> Grave</label>
+            <label><input type="checkbox" id="severo"> Severo</label>
+          </div>
+        </div>
 
-<!-- TEA -->
-<div class="checkbox-group">
-  <label><input type="checkbox" id="tea" onchange="toggleGrupo('grupoTEA')"> Transtorno do Espectro Autista (TEA)</label>
-  <div id="grupoTEA" style="display:none; margin-left:20px;">
-    <label><input type="checkbox" id="nivel1"> Nível I</label>
-    <label><input type="checkbox" id="nivel2"> Nível II</label>
-    <label><input type="checkbox" id="nivel3"> Nível III</label>
-  </div>
-</div>
+        <button type="button" class="expand-title" onclick="toggleExpand('tea')">
+          Transtorno do Espectro Autista (TEA)
+        </button>
+        <div id="teaContent" class="expand-content" style="display: none;">
+          <div style="margin-left: 20px; display: flex; flex-direction: column; gap: 8px; padding-top: 8px;">
+            <label><input type="checkbox" id="nivel1"> Nível I</label>
+            <label><input type="checkbox" id="nivel2"> Nível II</label>
+            <label><input type="checkbox" id="nivel3"> Nível III</label>
+          </div>
+        </div>
 
-<!-- Suporte -->
-<div class="checkbox-group">
-  <label>Suporte:</label>
-  <label><input type="checkbox" id="suporte_sim"> Sim</label>
-  <label><input type="checkbox" id="suporte_nao"> Não</label>
-</div>
+        <!-- Botão Suporte -->
+        <button type="button" class="expand-title" onclick="toggleExpand('suporte')">
+          Suporte
+        </button>
+        <div id="suporteContent" class="expand-content" style="display: none;">
+          <div style="margin-left: 20px; display: flex; flex-direction: column; gap: 8px; padding-top: 8px;">
+            <label><input type="checkbox" id="suporte_sim"> Sim</label>
+            <label><input type="checkbox" id="suporte_nao"> Não</label>
+          </div>
+        </div>
 
-<!-- Outra complicação -->
-<div class="form-group">
-  <label>Outra complicação:</label>
-  <input type="text" id="outra_complicacao" placeholder="Descreva se houver">
-</div>
+
+        <div class="form-group">
+          <label>Outra complicação:</label>
+          <input type="text" id="outra_complicacao" placeholder="Descreva se houver">
+        </div>
       </div>
 
       <button type="button" onclick="gerarPDF()">Salvar Anamnese (PDF)</button>
@@ -215,113 +249,163 @@
 
   <script>
     function gerarPDF() {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
 
-  let y = 20;
-  const linha = (texto, espacamento = 10) => {
-    doc.text(texto, 20, y);
-    y += espacamento;
-  };
+      let y = 20;
+      const linha = (texto, espacamento = 10) => {
+        // Quebra automática se chegar ao final da página
+        if (y > 270) {
+          doc.addPage();
+          y = 20; // volta para o topo da nova página
+        }
+        doc.text(texto, 20, y);
+        y += espacamento;
+      };
 
-  const get = (id) => document.getElementById(id)?.value || '';
-  const check = (id) => document.getElementById(id)?.checked;
 
-  doc.setFontSize(14);
-  doc.text('ANAMNESE PSICOPEDAGÓGICA', 105, y, { align: 'center' });
-  y += 10;
-  doc.text('ATENDIMENTO PARA CRIANÇAS ESPECIAIS', 105, y, { align: 'center' });
-  y += 15;
+      const get = (id) => document.getElementById(id)?.value || '';
+      const check = (id) => document.getElementById(id)?.checked;
 
-  doc.setFontSize(12);
-  linha(`Nome: ${get('nome')}`);
-  linha(`Data de Nascimento: ${get('nascimento')}`);
-  linha(`Idade: ${get('idade_crianca')}`);
-  linha(`Endereço: ${get('endereco')}`);
-  linha(`Bairro: ${get('bairro')}`);
-  linha(`Instituição de Ensino: ${get('escola')}`);
+      doc.setFontSize(14);
+      doc.text('ANAMNESE PSICOPEDAGÓGICA', 105, y, { align: 'center' });
+      y += 10;
+      linha('');
+      linha('');
+      doc.setFontSize(12);
+      linha(`Nome: ${get('nome')}`);
+      linha(`Data de Nascimento: ${get('nascimento')}`);
+      linha(`Idade: ${get('idade_crianca')}`);
+      linha(`Endereço: ${get('endereco')}`);
+      linha(`Bairro: ${get('bairro')}`);
+      linha(`Instituição de Ensino: ${get('escola')}`);
+      linha('Responsável 1: ' + get('resp1'));
+      linha('Idade: ' + get('idade1'));
+      linha('Escolaridade: ' + get('escolaridade1'));
+      linha('Profissão: ' + get('profissao1'));
+      linha('Responsável 2: ' + get('resp2'));
+      linha('Idade: ' + get('idade2'));
+      linha('Escolaridade: ' + get('escolaridade2'));
+      linha('Profissão: ' + get('profissao2'));
+      linha('Genitora: ' + get('genitora'));
+      linha('Histórico de gestações: ' + get('gestacoes'));
+      linha('Partos: ' + get('partos'));
+      linha('Abortos: ' + get('abortos'));
+      linha('');
+      linha('');
+      linha('');
+      linha('');
+      linha('');
+      linha('');
 
-  linha('');
-  linha('Responsável 1: ' + get('resp1'));
-  linha('Idade: ' + get('idade1'));
-  linha('Escolaridade: ' + get('escolaridade1'));
-  linha('Profissão: ' + get('profissao1'));
-  linha('Responsável 2: ' + get('resp2'));
-  linha('Idade: ' + get('idade2'));
-  linha('Escolaridade: ' + get('escolaridade2'));
-  linha('Profissão: ' + get('profissao2'));
-  linha('Genitora: ' + get('genitora'));
-  linha('Histórico de gestações: ' + get('gestacoes'));
-  linha('Partos: ' + get('partos'));
-  linha('Abortos: ' + get('abortos'));
+      doc.setFontSize(14);
+      doc.text('INFORMAÇÕES DE ESCOLARIDADE', 105, y, { align: 'center' });
+      y += 10;
+      if (check('ef1_1')) linha('• 1º ano');
+      if (check('ef1_2')) linha('• 2º ano');
+      if (check('ef1_3')) linha('• 3º ano');
+      if (check('ef1_4')) linha('• 4º ano');
+      if (check('ef1_5')) linha('• 5º ano');
+      if (check('ef2')) linha('• Ensino Fundamental - Fase II');
+      if (check('socioeducacional')) linha(`• Programa Socioeducacional - Ano: ${get('anoSocioeducacional')}`);
+      if (check('espTrabalho')) linha('• Educação Especial para o Trabalho');
+      if (get('turma')) linha('Turma: ' + get('turma'));
+      if (get('turno')) linha('Turno: ' + get('turno'));
+      linha('');
+      linha('');
+      linha('');
+      doc.setFontSize(14);
+      doc.text('DEFICIÊNCIA ', 105, y, { align: 'center' });
+      y += 10;
+      if (check('def_intelectual')) {
+        linha('• Deficiência Intelectual');
+        if (check('leve')) linha('  - Leve');
+        if (check('moderado')) linha('  - Moderado');
+        if (check('grave')) linha('  - Grave');
+        if (check('severo')) linha('  - Severo');
+      }
+      linha('');
+      linha('');
+      if (check('tea')) {
+        linha('• Transtorno do Espectro Autista (TEA)');
+        if (check('nivel1')) linha('  - Nível I');
+        if (check('nivel2')) linha('  - Nível II');
+        if (check('nivel3')) linha('  - Nível III');
+      }
+      linha('');
+      linha('');
+      if (check('suporte')) {
+        if (check('suporte_sim')) linha('Suporte: Sim');
+        if (check('suporte_nao')) linha('Suporte: Não');
+      }
 
-  // ETAPA DE ESCOLARIZAÇÃO
-  linha('');
-  linha('ETAPA DE ESCOLARIZAÇÃO');
-  if (check('ef1_1')) linha('• 1º ano');
-  if (check('ef1_2')) linha('• 2º ano');
-  if (check('ef1_3')) linha('• 3º ano');
-  if (check('ef1_4')) linha('• 4º ano');
-  if (check('ef1_5')) linha('• 5º ano');
-  if (check('ef2')) linha('• Ensino Fundamental - Fase II');
-  if (check('socioeducacional')) linha(`• Programa Socioeducacional - Ano: ${get('anoSocioeducacional')}`);
-  if (check('espTrabalho')) linha('• Educação Especial para o Trabalho');
-  if (get('turma')) linha('Turma: ' + get('turma'));
-  if (get('turno')) linha('Turno: ' + get('turno'));
+      linha('');
+      linha('');
+      if (get('outra_complicacao')) linha('Outra complicação: ' + get('outra_complicacao'));
 
-  // DEFICIÊNCIAS
-  linha('');
-  linha('DEFICIÊNCIA');
-  if (check('def_intelectual')) {
-  linha('• Deficiência Intelectual');
-  if (check('leve')) linha('  - Leve');
-  if (check('moderado')) linha('  - Moderado');
-  if (check('grave')) linha('  - Grave');
-  if (check('severo')) linha('  - Severo');
-}
+      if (y > 245) {
+        doc.addPage();
+        y = 20;
+      }
 
-// TEA
-if (check('tea')) {
-  linha('• Transtorno do Espectro Autista (TEA)');
-  if (check('nivel1')) linha('  - Nível I');
-  if (check('nivel2')) linha('  - Nível II');
-  if (check('nivel3')) linha('  - Nível III');
-}
-
-// Suporte
-if (check('suporte_sim')) linha('Suporte: Sim');
-if (check('suporte_nao')) linha('Suporte: Não');
-
-// Outra complicação
-if (get('outra_complicacao')) linha('Outra complicação: ' + get('outra_complicacao'));
-
- // Adiciona nova página se não houver espaço suficiente para o rodapé
-if (y > 245) {
-  doc.addPage();
-  y = 20;
-}
-
-// Rodapé
-y = 265;
-doc.setDrawColor(0);
-doc.line(75, y, 135, y);
-y += 6;
-doc.setFontSize(12);
-doc.setFont("Times", "Bold");
-doc.text("NATALIA CRISTINA FERREIRA", 105, y, { align: "center" });
-y += 5;
-doc.setFontSize(11);
-doc.setFont("Times", "Normal");
-doc.text("PSICOPEDAGOGA CLÍNICA E INSTITUCIONAL", 105, y, { align: "center" });
-y += 5;
-doc.text("ABPq - 1651", 105, y, { align: "center" });
+      // Assinatura no rodapé
+      y = 265;
+      doc.setDrawColor(0);
+      doc.line(75, y, 135, y);
+      y += 6;
+      doc.setFontSize(12);
+      doc.setFont("Times", "Bold");
+      doc.text("NATALIA CRISTINA FERREIRA", 105, y, { align: "center" });
+      y += 5;
+      doc.setFontSize(11);
+      doc.setFont("Times", "Normal");
+      doc.text("PSICOPEDAGOGA CLÍNICA E INSTITUCIONAL", 105, y, { align: "center" });
+      y += 5;
+      doc.text("ABPq - 1651", 105, y, { align: "center" });
 
       doc.save("Anamnese_Psicopedagogica.pdf");
     }
+
     function toggleGrupo(id) {
-  const grupo = document.getElementById(id);
-  grupo.style.display = grupo.style.display === 'none' ? 'block' : 'none';
-}
+      const grupo = document.getElementById(id);
+      grupo.style.display = grupo.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function toggleExpand(id) {
+      const content = document.getElementById(id + 'Content');
+      const title = event.currentTarget;
+
+      // Alterna visual e exibe/esconde conteúdo
+      title.classList.toggle('active');
+      content.style.display = content.style.display === 'none' ? 'block' : 'none';
+
+      // Garante que existe um checkbox oculto para indicar se o grupo foi expandido
+      if (!document.getElementById(id)) {
+        const hiddenCheck = document.createElement('input');
+        hiddenCheck.type = 'checkbox';
+        hiddenCheck.id = id;
+        hiddenCheck.style.display = 'none';
+        document.getElementById('anamneseForm').appendChild(hiddenCheck);
+      }
+
+      // Marca/desmarca o checkbox oculto conforme o estado da expansão
+      document.getElementById(id).checked = title.classList.contains('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('anamneseForm');
+      ['def_intelectual', 'tea', 'suporte'].forEach(id => {
+        if (!document.getElementById(id)) {
+          const hiddenInput = document.createElement('input');
+          hiddenInput.type = 'checkbox';
+          hiddenInput.id = id;
+          hiddenInput.style.display = 'none';
+          form.appendChild(hiddenInput);
+        }
+      });
+    });
+
   </script>
 </body>
+
 </html>
