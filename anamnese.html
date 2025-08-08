@@ -174,25 +174,39 @@
       <div class="form-section">
         <h2>III - DEFICIÊNCIA</h2>
 
-        <div class="checkbox-group">
-          <label><input type="checkbox" id="def_intelectual"> Deficiência Intelectual</label>
-          <label><input type="checkbox" id="intermitente"> Intermitente</label>
-          <label><input type="checkbox" id="limitado"> Limitado</label>
-          <label><input type="checkbox" id="extensivo"> Extensivo</label>
-          <label><input type="checkbox" id="permanente"> Permanente</label>
-        </div>
+        <!-- Deficiência Intelectual -->
+<div class="checkbox-group">
+  <label><input type="checkbox" id="def_intelectual" onchange="toggleGrupo('grupoIntelectual')"> Deficiência Intelectual</label>
+  <div id="grupoIntelectual" style="display:none; margin-left:20px;">
+    <label><input type="checkbox" id="leve"> Leve</label>
+    <label><input type="checkbox" id="moderado"> Moderado</label>
+    <label><input type="checkbox" id="grave"> Grave</label>
+    <label><input type="checkbox" id="severo"> Severo</label>
+  </div>
+</div>
 
-        <div class="checkbox-group">
-          <label><input type="checkbox" id="def_multipla"> Deficiência Múltipla</label>
-          <input type="text" id="detalheMultipla" placeholder="Especifique">
-        </div>
+<!-- TEA -->
+<div class="checkbox-group">
+  <label><input type="checkbox" id="tea" onchange="toggleGrupo('grupoTEA')"> Transtorno do Espectro Autista (TEA)</label>
+  <div id="grupoTEA" style="display:none; margin-left:20px;">
+    <label><input type="checkbox" id="nivel1"> Nível I</label>
+    <label><input type="checkbox" id="nivel2"> Nível II</label>
+    <label><input type="checkbox" id="nivel3"> Nível III</label>
+  </div>
+</div>
 
-        <div class="checkbox-group">
-          <label><input type="checkbox" id="tea"> Transtorno do Espectro Autista (TEA)</label>
-          <label><input type="checkbox" id="nivel1"> Nível I</label>
-          <label><input type="checkbox" id="nivel2"> Nível II</label>
-          <label><input type="checkbox" id="nivel3"> Nível III</label>
-        </div>
+<!-- Suporte -->
+<div class="checkbox-group">
+  <label>Suporte:</label>
+  <label><input type="checkbox" id="suporte_sim"> Sim</label>
+  <label><input type="checkbox" id="suporte_nao"> Não</label>
+</div>
+
+<!-- Outra complicação -->
+<div class="form-group">
+  <label>Outra complicação:</label>
+  <input type="text" id="outra_complicacao" placeholder="Descreva se houver">
+</div>
       </div>
 
       <button type="button" onclick="gerarPDF()">Salvar Anamnese (PDF)</button>
@@ -259,37 +273,55 @@
   linha('');
   linha('DEFICIÊNCIA');
   if (check('def_intelectual')) {
-    linha('• Deficiência Intelectual');
-    if (check('intermitente')) linha('  - Intermitente');
-    if (check('limitado')) linha('  - Limitado');
-    if (check('extensivo')) linha('  - Extensivo');
-    if (check('permanente')) linha('  - Permanente');
-  }
-  if (check('def_multipla')) linha('• Deficiência Múltipla: ' + get('detalheMultipla'));
-  if (check('tea')) {
-    linha('• Transtorno do Espectro Autista');
-    if (check('nivel1')) linha('  - Nível I');
-    if (check('nivel2')) linha('  - Nível II');
-    if (check('nivel3')) linha('  - Nível III');
-  }
+  linha('• Deficiência Intelectual');
+  if (check('leve')) linha('  - Leve');
+  if (check('moderado')) linha('  - Moderado');
+  if (check('grave')) linha('  - Grave');
+  if (check('severo')) linha('  - Severo');
+}
 
- if (y > 245) { doc.addPage(); y = 20; }
-      y = 265;
-      doc.setDrawColor(0);
-      doc.line(75, y, 135, y);
-      y += 6;
-      doc.setFontSize(12);
-      doc.setFont("Times", "Bold");
-      doc.text("NATALIA CRISTINA FERREIRA", 105, y, { align: "center" }); 
-      y += 5;
-      doc.setFontSize(11);
-      doc.setFont("Times", "Normal");
-      doc.text("PSICOPEDAGOGA CLÍNICA E INSTITUCIONAL", 105, y, { align: "center" }); 
-      y += 5;
-            doc.text("ABPq - 1651", 105, y, { align: "center" });
+// TEA
+if (check('tea')) {
+  linha('• Transtorno do Espectro Autista (TEA)');
+  if (check('nivel1')) linha('  - Nível I');
+  if (check('nivel2')) linha('  - Nível II');
+  if (check('nivel3')) linha('  - Nível III');
+}
+
+// Suporte
+if (check('suporte_sim')) linha('Suporte: Sim');
+if (check('suporte_nao')) linha('Suporte: Não');
+
+// Outra complicação
+if (get('outra_complicacao')) linha('Outra complicação: ' + get('outra_complicacao'));
+
+ // Adiciona nova página se não houver espaço suficiente para o rodapé
+if (y > 245) {
+  doc.addPage();
+  y = 20;
+}
+
+// Rodapé
+y = 265;
+doc.setDrawColor(0);
+doc.line(75, y, 135, y);
+y += 6;
+doc.setFontSize(12);
+doc.setFont("Times", "Bold");
+doc.text("NATALIA CRISTINA FERREIRA", 105, y, { align: "center" });
+y += 5;
+doc.setFontSize(11);
+doc.setFont("Times", "Normal");
+doc.text("PSICOPEDAGOGA CLÍNICA E INSTITUCIONAL", 105, y, { align: "center" });
+y += 5;
+doc.text("ABPq - 1651", 105, y, { align: "center" });
 
       doc.save("Anamnese_Psicopedagogica.pdf");
     }
+    function toggleGrupo(id) {
+  const grupo = document.getElementById(id);
+  grupo.style.display = grupo.style.display === 'none' ? 'block' : 'none';
+}
   </script>
 </body>
 </html>
