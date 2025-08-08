@@ -168,27 +168,45 @@
       <div class="form-section">
         <h2>II - ETAPA DE ESCOLARIZAÇÃO</h2>
 
-        <div class="checkbox-group">
-          <label><input type="checkbox" id="ef1_1"> Ensino Fundamental - Fase I: 1º ano</label>
-          <label><input type="checkbox" id="ef1_2"> 2º ano</label>
-          <label><input type="checkbox" id="ef1_3"> 3º ano</label>
-          <label><input type="checkbox" id="ef1_4"> 4º ano</label>
-          <label><input type="checkbox" id="ef1_5"> 5º ano</label>
+        <!-- Ensino Fundamental - Fase I -->
+        <button type="button" class="expand-title" onclick="toggleExpand('fundamental1')">
+          Ensino Fundamental - Fase I
+        </button>
+        <div id="fundamental1Content" class="expand-content"
+          style="display: none; margin-left: 20px; margin-bottom: 15px;">
+          <div class="checkbox-group" style="display: flex; flex-direction: column; gap: 5px;">
+            <label><input type="checkbox" id="ef1_1"> 1º ano</label>
+            <label><input type="checkbox" id="ef1_2"> 2º ano</label>
+            <label><input type="checkbox" id="ef1_3"> 3º ano</label>
+            <label><input type="checkbox" id="ef1_4"> 4º ano</label>
+            <label><input type="checkbox" id="ef1_5"> 5º ano</label>
+          </div>
         </div>
 
-        <div class="checkbox-group">
-          <label><input type="checkbox" id="ef2"> Ensino Fundamental - Fase II</label>
+        <!-- Ensino Fundamental - Fase II -->
+        <button type="button" class="expand-title" onclick="toggleExpand('fundamental2')">
+          Ensino Fundamental - Fase II
+        </button>
+        <div id="fundamental2Content" class="expand-content"
+          style="display: none; margin-left: 20px; margin-bottom: 15px;">
+          <div class="checkbox-group" style="display: flex; flex-direction: column; gap: 5px;">
+            <label><input type="checkbox" id="ef2"> 6º ano</label>
+            <label><input type="checkbox" id="ef3"> 7º ano</label>
+            <label><input type="checkbox" id="ef4"> 8º ano</label>
+            <label><input type="checkbox" id="ef5"> 9º ano</label>
+          </div>
         </div>
-
+        <br>
         <div class="checkbox-group">
           <label><input type="checkbox" id="socioeducacional"> Programa Socioeducacional</label>
+          <br>
           <input type="text" id="anoSocioeducacional" placeholder="Ano (se aplicável)">
         </div>
-
+<br>
         <div class="checkbox-group">
           <label><input type="checkbox" id="espTrabalho"> Educação Especial para o Trabalho</label>
         </div>
-
+<br>
         <div class="form-group">
           <label>Turma:</label>
           <input type="text" id="turma">
@@ -235,14 +253,14 @@
             <label><input type="checkbox" id="suporte_nao"> Não</label>
           </div>
         </div>
-
+<br>
 
         <div class="form-group">
           <label>Outra complicação:</label>
           <input type="text" id="outra_complicacao" placeholder="Descreva se houver">
         </div>
       </div>
-
+<br>
       <button type="button" onclick="gerarPDF()">Salvar Anamnese (PDF)</button>
     </form>
   </div>
@@ -299,7 +317,7 @@
       linha('');
 
       doc.setFontSize(14);
-      doc.text('INFORMAÇÕES DE ESCOLARIDADE', 105, y, { align: 'center' });
+      doc.text('INFORMAÇÕES DE ESCOLARIDADE DO ATENDIDO', 105, y, { align: 'center' });
       y += 10;
       if (check('ef1_1')) linha('• 1º ano');
       if (check('ef1_2')) linha('• 2º ano');
@@ -307,6 +325,11 @@
       if (check('ef1_4')) linha('• 4º ano');
       if (check('ef1_5')) linha('• 5º ano');
       if (check('ef2')) linha('• Ensino Fundamental - Fase II');
+      if (check('ef1_1')) linha('• 6º ano');
+      if (check('ef1_2')) linha('• 7º ano');
+      if (check('ef1_3')) linha('• 8º ano');
+      if (check('ef1_4')) linha('• 8º ano');
+      if (check('ef1_5')) linha('• 9º ano');
       if (check('socioeducacional')) linha(`• Programa Socioeducacional - Ano: ${get('anoSocioeducacional')}`);
       if (check('espTrabalho')) linha('• Educação Especial para o Trabalho');
       if (get('turma')) linha('Turma: ' + get('turma'));
@@ -315,7 +338,7 @@
       linha('');
       linha('');
       doc.setFontSize(14);
-      doc.text('DEFICIÊNCIA ', 105, y, { align: 'center' });
+      doc.text('DEFICIÊNCIA DO ATENDIDO', 105, y, { align: 'center' });
       y += 10;
       if (check('def_intelectual')) {
         linha('• Deficiência Intelectual');
@@ -332,7 +355,6 @@
         if (check('nivel2')) linha('  - Nível II');
         if (check('nivel3')) linha('  - Nível III');
       }
-      linha('');
       linha('');
       if (check('suporte')) {
         if (check('suporte_sim')) linha('Suporte: Sim');
