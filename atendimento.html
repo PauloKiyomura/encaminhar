@@ -257,7 +257,18 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF({ unit: 'mm', format: 'a4' });
             const dataImpressao = getDataHoraAtual();
-            const logoUrl = "imagem.PNG"; 
+
+            fetch(logoUrl)
+                .then(res => res.blob())
+                .then(blob => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        doc.addImage(e.target.result, "PNG", 80, 5, 50, 25);
+                        gerarConteudo(doc, dataImpressao);
+                    };
+                    reader.readAsDataURL(blob);
+                })
+                .catch(() => gerarConteudo(doc, dataImpressao));
 
             function gerarConteudo(doc, dataImpressao) {
                 doc.setFont("Times", "Bold");
@@ -286,37 +297,25 @@
                 addTexto("Possível Diagnóstico:", document.getElementById("diagnostico").value);
                 addTexto("Motivo do Encaminhamento:", document.getElementById("motivo").value);
 
+                // Espaço antes da assinatura
                 y += 20;
-                const centerX = 105;
+                const centerX = 105; // centro da página
 
+                // Traço centralizado
                 doc.line(centerX - 40, y, centerX + 40, y);
+
+                // Texto centralizado
                 doc.text("Natalia Cristina Ferreira", centerX, y + 6, { align: "center" });
                 doc.setFontSize(12);
                 doc.text("PSICOPEDAGOGA CLÍNICA E INSTITUCIONAL", centerX, y + 12, { align: "center" });
                 doc.text("ABPq - 1651", centerX, y + 18, { align: "center" });
 
+                // Rodapé
                 doc.setFontSize(10);
                 doc.text(`Data de impressão: ${dataImpressao}`, 105, 290, { align: "center" });
 
                 doc.save("Encaminhamento_Psicopedagogico.pdf");
             }
-
-            fetch(logoUrl)
-                .then(res => {
-                    if (!res.ok) throw new Error();
-                    return res.blob();
-                })
-                .then(blob => {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        doc.addImage(e.target.result, "PNG", 80, 5, 50, 25);
-                        gerarConteudo(doc, dataImpressao);
-                    };
-                    reader.readAsDataURL(blob);
-                })
-                .catch(() => {
-                    gerarConteudo(doc, dataImpressao);
-                });
         });
 
         document.addEventListener('DOMContentLoaded', function() {
