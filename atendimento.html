@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="flor.ico" type="image/x-icon" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="/flor.ico" type="image/x-icon" />
     <title>Atendimento</title>
     <style>
         * {
@@ -12,14 +13,14 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
             background: linear-gradient(135deg, #000000 0%, #00193b 100%);
             color: #333;
             line-height: 1.6;
             padding: 20px;
         }
-        
+
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -31,45 +32,47 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
             border: 1px solid rgba(255, 255, 255, 0.18);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
         }
 
         .container:hover {
             transform: scale(1.02);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
         }
-        
+
         h1 {
             color: #fff;
             text-align: center;
             margin-bottom: 30px;
             font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
-        
+
         .logo {
             text-align: center;
             margin-bottom: 20px;
         }
-        
+
         .logo img {
             max-width: 150px;
             height: auto;
-            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.4));
+            filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.4));
         }
-        
+
         .form-group {
             margin-bottom: 20px;
         }
-        
+
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: 500;
             color: #fff;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
-        
-        input, textarea {
+
+        input,
+        textarea {
             width: 100%;
             padding: 10px;
             border: none;
@@ -79,17 +82,18 @@
             transition: all 0.3s ease;
             outline: none;
         }
-        
-        input:focus, textarea:focus {
+
+        input:focus,
+        textarea:focus {
             background: rgba(255, 255, 255, 0.95);
             box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
         }
-        
+
         textarea {
             min-height: 100px;
             resize: vertical;
         }
-        
+
         button {
             background-color: #3498db;
             color: white;
@@ -104,40 +108,40 @@
             font-weight: 600;
             letter-spacing: 1px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
-        
+
         button:hover {
             background-color: #2980b9;
             transform: scale(1.03);
-            box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
         }
-        
+
         .print-button {
             background-color: #27ae60;
         }
-        
+
         .print-button:hover {
             background-color: #219653;
         }
-        
+
         .result-container {
             margin-top: 40px;
             padding: 30px;
             background: rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(10px);
             border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             display: none;
         }
-        
+
         .result-container h2 {
             color: #fff;
             margin-bottom: 20px;
             text-align: center;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
         }
-        
+
         .result-content {
             background-color: rgba(255, 255, 255, 0.85);
             padding: 20px;
@@ -145,102 +149,171 @@
             font-family: 'Times New Roman', Times, serif;
             color: #000;
         }
-        
+
         .date-time-group {
             display: flex;
             gap: 15px;
         }
-        
-        .date-time-group > div {
+
+        .date-time-group>div {
             flex: 1;
         }
-        
+
+        /* Botão "Ir para Anamnese" no canto superior direito */
+        .btn-anamnese {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #8e44ad;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-anamnese:hover {
+            background-color: #732d91;
+            transform: scale(1.05);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+        }
+
         @media (max-width: 600px) {
             .date-time-group {
                 flex-direction: column;
+            }
+
+            .btn-anamnese {
+                position: static;
+                display: inline-block;
+                width: 100%;
+                margin-bottom: 20px;
+                text-align: center;
+                box-sizing: border-box;
+                font-size: 16px;
+                padding: 12px 0;
             }
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
+
 <body>
     <div class="container">
+        <a href="anamnese.html" class="btn-anamnese" title="Ir para Anamnese">Ir para Anamnese</a>
+
         <div class="logo">
-            <img src="imagem.PNG" alt="Logo Clínica Psicopedagógica">
+            <img src="/imagem.PNG" alt="Logo Clínica Psicopedagógica" />
         </div>
-        
+
         <h1>ATENDIMENTO NATALIA FERREIRA</h1>
-        
+
         <form id="encaminhamentoForm">
             <div class="form-group">
                 <label for="nome">Nome do Paciente:</label>
-                <input type="text" id="nome" required>
+                <input type="text" id="nome" required />
             </div>
-            
+
+            <div class="form-group">
+                <label for="nascimento">Data de Nascimento:</label>
+                <input type="date" id="nascimento" required max="" />
+            </div>
+
             <div class="form-group">
                 <label for="idade">Idade:</label>
-                <input type="number" id="idade" required min="0" max="120">
+                <input type="number" id="idade" readonly />
             </div>
-            
+
             <div class="date-time-group">
                 <div class="form-group">
                     <label for="data">Data:</label>
-                    <input type="date" id="data" required>
+                    <input type="date" id="data" required />
                 </div>
-                
+
                 <div class="form-group">
                     <label for="hora">Hora:</label>
-                    <input type="time" id="hora" required>
+                    <input type="time" id="hora" required />
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <label for="diagnostico">Possível Diagnóstico:</label>
                 <textarea id="diagnostico" required></textarea>
             </div>
-            
+
             <div class="form-group">
                 <label for="motivo">Motivo do Encaminhamento:</label>
                 <textarea id="motivo" required></textarea>
             </div>
 
-            <div class="form-group">
-                <label for="anamnese">Anamnese:</label>
-                <input type="text" id="anamnese" required>
-            </div>
-            
             <button type="submit">GERAR ENCAMINHAMENTO</button>
         </form>
-        
+
         <div class="result-container" id="resultContainer">
             <h2>Encaminhamento Psicopedagógico</h2>
             <div class="result-content" id="resultContent"></div>
             <button class="print-button" id="printButton">GERAR PDF</button>
         </div>
     </div>
-    
+
     <script>
-        function getDataHoraAtual() {
-            const agora = new Date();
-            return `${String(agora.getDate()).padStart(2,'0')}/${String(agora.getMonth()+1).padStart(2,'0')}/${agora.getFullYear()} às ${String(agora.getHours()).padStart(2,'0')}h${String(agora.getMinutes()).padStart(2,'0')}min`;
+        function calcularIdade(dataNasc) {
+            const hoje = new Date();
+            const nascimento = new Date(dataNasc);
+            let idade = hoje.getFullYear() - nascimento.getFullYear();
+            const mes = hoje.getMonth() - nascimento.getMonth();
+            if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+                idade--;
+            }
+            return idade;
         }
 
-        document.getElementById('encaminhamentoForm').addEventListener('submit', function(e) {
+        document.getElementById('nascimento').addEventListener('change', function () {
+            const dataNasc = this.value;
+            if (dataNasc) {
+                const idadeCalculada = calcularIdade(dataNasc);
+                document.getElementById('idade').value = idadeCalculada >= 0 ? idadeCalculada : '';
+            } else {
+                document.getElementById('idade').value = '';
+            }
+        });
+
+        // Setar max no input nascimento para hoje, para não permitir data futura
+        document.addEventListener('DOMContentLoaded', function () {
+            const hojeStr = new Date().toISOString().split('T')[0];
+            document.getElementById('nascimento').setAttribute('max', hojeStr);
+
+            const hoje = new Date();
+            document.getElementById('data').value = hojeStr;
+            const minutos = Math.round(hoje.getMinutes() / 15) * 15;
+            document.getElementById('hora').value = `${String(hoje.getHours()).padStart(2, '0')}:${String(minutos).padStart(2, '0')}`;
+        });
+
+        function getDataHoraAtual() {
+            const agora = new Date();
+            return `${String(agora.getDate()).padStart(2, '0')}/${String(agora.getMonth() + 1).padStart(2, '0')}/${agora.getFullYear()} às ${String(agora.getHours()).padStart(2, '0')}h${String(agora.getMinutes()).padStart(2, '0')}min`;
+        }
+
+        document.getElementById('encaminhamentoForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const dataFormatada = document.getElementById('data').value.split('-').reverse().join('/');
             const horaFormatada = document.getElementById('hora').value.replace(':', 'h') + 'min';
             const dataImpressao = getDataHoraAtual();
-            
+
             const encaminhamentoHTML = `
                 <h3 style="text-align:center;">ENCAMINHAMENTO PSICOPEDAGÓGICO</h3>
                 <p><strong>Nome:</strong> ${document.getElementById('nome').value}</p>
                 <p><strong>Idade:</strong> ${document.getElementById('idade').value} anos</p>
                 <p><strong>Data e Hora:</strong> ${dataFormatada} - ${horaFormatada}</p>
-                <p><strong>Anamnese:</strong> ${document.getElementById('anamnese').value}</p>
                 <p><strong>Possível Diagnóstico:</strong> ${document.getElementById('diagnostico').value}</p>
                 <p><strong>Motivo do Encaminhamento:</strong></p>
                 <p style="text-align:justify;">${document.getElementById('motivo').value}</p>
-                <br><br>
+                <br /><br />
                 <div style="margin-top:30px; text-align:center;">
                     <p>_________________________________________</p>
                     <p>Natalia Cristina Ferreira</p>
@@ -253,28 +326,35 @@
             document.getElementById('resultContainer').style.display = 'block';
         });
 
-        document.getElementById('printButton').addEventListener('click', function() {
+        document.getElementById('printButton').addEventListener('click', function () {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF({ unit: 'mm', format: 'a4' });
             const dataImpressao = getDataHoraAtual();
 
-            fetch(logoUrl)
-                .then(res => res.blob())
-                .then(blob => {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        doc.addImage(e.target.result, "PNG", 80, 5, 50, 25);
-                        gerarConteudo(doc, dataImpressao);
-                    };
-                    reader.readAsDataURL(blob);
-                })
-                .catch(() => gerarConteudo(doc, dataImpressao));
+            // Se quiser adicionar logo, defina a URL correta aqui, ex:
+            // const logoUrl = '/imagem.PNG';
+            // Se não for usar, pode comentar o código abaixo
+
+            // fetch(logoUrl)
+            //     .then(res => res.blob())
+            //     .then(blob => {
+            //         const reader = new FileReader();
+            //         reader.onload = function (e) {
+            //             doc.addImage(e.target.result, "PNG", 80, 5, 50, 25);
+            //             gerarConteudo(doc, dataImpressao);
+            //         };
+            //         reader.readAsDataURL(blob);
+            //     })
+            //     .catch(() => gerarConteudo(doc, dataImpressao));
+
+            // Caso não queira logo, só gerar o conteúdo direto:
+            gerarConteudo(doc, dataImpressao);
 
             function gerarConteudo(doc, dataImpressao) {
                 doc.setFont("Times", "Bold");
                 doc.setFontSize(18);
                 doc.text("ENCAMINHAMENTO PSICOPEDAGÓGICO", 105, 38, { align: "center" });
-               
+
                 doc.setFont("Times", "Normal");
                 doc.setFontSize(14);
                 let y = 50;
@@ -293,7 +373,6 @@
                 addTexto("Nome:", document.getElementById("nome").value);
                 addTexto("Idade:", `${document.getElementById("idade").value} anos`);
                 addTexto("Data e Hora:", `${document.getElementById("data").value.split("-").reverse().join("/")} - ${document.getElementById("hora").value}h`);
-                addTexto("Anamnese:", document.getElementById("anamnese").value);
                 addTexto("Possível Diagnóstico:", document.getElementById("diagnostico").value);
                 addTexto("Motivo do Encaminhamento:", document.getElementById("motivo").value);
 
@@ -317,13 +396,7 @@
                 doc.save("Encaminhamento_Psicopedagogico.pdf");
             }
         });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const hoje = new Date();
-            document.getElementById('data').value = hoje.toISOString().split('T')[0];
-            const minutos = Math.round(hoje.getMinutes() / 15) * 15;
-            document.getElementById('hora').value = `${String(hoje.getHours()).padStart(2, '0')}:${String(minutos).padStart(2, '0')}`;
-        });
     </script>
 </body>
+
 </html>
