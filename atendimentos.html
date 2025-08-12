@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<link rel="shortcut icon" href="/flor.ico" type="image/x-icon" />
+<title>Meus Atendimentos</title>
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #000000 0%, #002a64 100%);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      transition: opacity 0.8s ease;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.15);
+      padding: 40px 60px;
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      animation: fadeIn 1s ease;
+      width: 90vw;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+      color: #ffffff;
+    }
+
+    a.logout-link {
+      align-self: flex-end;
+      margin-bottom: 20px;
+      color: #88aaff;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+    a.logout-link:hover {
+      color: #ddeeff;
+      text-decoration: underline;
+    }
+
+    input {
+      padding: 10px 14px;
+      margin: 8px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      width: 200px;
+      max-width: 90vw;
+      outline: none;
+      box-shadow: inset 0 0 5px rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      transition: background 0.3s ease;
+    }
+    input::placeholder {
+      color: #bbb;
+    }
+    input:focus {
+      background: rgba(255,255,255,0.25);
+    }
+
+    /* Personalização para input date */
+    input[type="date"] {
+      color: #fff;
+      background: rgba(255,255,255,0.1);
+    }
+    input[type="date"]::-webkit-inner-spin-button,
+    input[type="date"]::-webkit-clear-button {
+      display: none;
+    }
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 25px;
+      background: rgba(0,0,0,0.25);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+    thead {
+      background: #222244cc;
+      color: #eef;
+    }
+    th, td {
+      padding: 14px 18px;
+      text-align: left;
+    }
+    tbody tr {
+      transition: background-color 0.3s ease;
+      cursor: default;
+    }
+    tbody tr:hover {
+      background: #4455cc66;
+    }
+
+    a {
+      color: #aad4ff;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    /* Botão Mágico */
+    .btn-magico {
+      position: relative;
+      border: none;
+      outline: none;
+      padding: 1.2rem 2.5rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      border-radius: 50px;
+      background: linear-gradient(45deg, #000000, #3333ff);
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2),
+                  inset 0 -5px 15px rgba(0, 0, 0, 0.3),
+                  inset 0 5px 10px rgba(255, 255, 255, 0.2);
+      z-index: 1;
+      animation: pulse 2s infinite;
+      margin-top: 30px;
+      align-self: center;
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn-magico:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3),
+                  inset 0 -5px 15px rgba(0, 0, 0, 0.3),
+                  inset 0 5px 10px rgba(255, 255, 255, 0.3);
+      background: linear-gradient(45deg, #8888d8, #1100ff);
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow:
+          0 10px 20px rgba(0, 0, 0, 0.2),
+          inset 0 -5px 15px rgba(0, 0, 0, 0.3),
+          inset 0 5px 10px rgba(255, 255, 255, 0.2);
+      }
+      50% {
+        box-shadow:
+          0 12px 24px rgba(0, 0, 255, 0.4),
+          inset 0 -5px 20px rgba(0, 0, 255, 0.5),
+          inset 0 7px 15px rgba(200, 200, 255, 0.4);
+      }
+    }
+
+    /* Efeito partículas nos botões (opcional para implementar JS depois) */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>📂 Meus Atendimentos</h1>
+    <a href="login.html" class="logout-link">🚪 Sair</a>
+
+    <input type="text" id="filtro-nome" placeholder="Filtrar por nome" />
+    <input type="date" id="filtro-data" />
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Data</th>
+          <th>Arquivo</th>
+        </tr>
+      </thead>
+      <tbody id="tabela-arquivos">
+        {% for a in arquivos %}
+        <tr>
+          <td>{{ a.nome }}</td>
+          <td>{{ a.data }}</td>
+          <td>
+            <a href="{{ url_for('download', filename=a.arquivo) }}" class="btn-magico" download>Baixar</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+<script>
+function converterDataTabelaParaISO(dataPTBR) {
+  const partes = dataPTBR.split('/');
+  if (partes.length !== 3) return '';
+  const [dia, mes, ano] = partes;
+  return `${ano}-${mes.padStart(2,'0')}-${dia.padStart(2,'0')}`;
+}
+
+function filtrarTabela() {
+    let nomeFiltro = document.getElementById('filtro-nome').value.toLowerCase();
+    let dataFiltro = document.getElementById('filtro-data').value; // yyyy-mm-dd
+    let linhas = document.querySelectorAll('#tabela-arquivos tr');
+
+    linhas.forEach(linha => {
+        let nome = linha.cells[0].innerText.toLowerCase();
+        let dataTabela = linha.cells[1].innerText;
+        let dataISO = converterDataTabelaParaISO(dataTabela);
+
+        let mostrar = true;
+
+        if (nomeFiltro && !nome.includes(nomeFiltro)) mostrar = false;
+        if (dataFiltro && dataFiltro !== dataISO) mostrar = false;
+
+        linha.style.display = mostrar ? '' : 'none';
+    });
+}
+
+document.getElementById('filtro-nome').addEventListener('keyup', filtrarTabela);
+document.getElementById('filtro-data').addEventListener('change', filtrarTabela);
+</script>
+</body>
+</html>
