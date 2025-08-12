@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="shortcut icon" href="flor.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/flor.ico" type="image/x-icon" />
   <title>Tela Inicial - Atendimento Natalia Ferreira</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -112,7 +112,7 @@
 <body>
   <div class="container">
     <div class="logo">
-      <img src="imagem.PNG" alt="Logo Natalia Ferreira">
+      <img src="/imagem.PNG" alt="Logo Natalia Ferreira">
     </div>
 
     <h1 class="text-5xl">Atendimento Psicopedagógico</h1>
@@ -122,7 +122,10 @@
         <span>COMEÇAR</span>
         <div class="particles"></div>
       </button>
-
+      <button id="loginBtn" class="btn-magico">
+    <span>LOGIN</span>
+    <div class="particles"></div>
+  </button>
       <button id="anamneseBtn" class="btn-magico">
         <span>ANAMNESE</span>
         <div class="particles"></div>
@@ -131,59 +134,67 @@
   </div>
 
   <script>
-    // Função de redirecionamento com fade-out
-    const delayAndRedirect = (url) => {
-      document.body.classList.add("fade-out");
-      setTimeout(() => {
-        window.location.href = url;
-      }, 800);
-    };
+  // Função de redirecionamento com fade-out e abertura em nova aba
+  const delayAndOpenNewTab = (url, button) => {
+    button.disabled = true; // evita múltiplos cliques
+    document.body.classList.add("fade-out");
+    setTimeout(() => {
+      window.open(url, "_blank");
+      document.body.classList.remove("fade-out");
+      button.disabled = false;
+    }, 800);
+  };
 
-    // Redirecionamentos
-    document.getElementById("startBtn").addEventListener("click", () => {
-      delayAndRedirect("atendimento.html");
+  // Redirecionamentos
+  document.getElementById("startBtn").addEventListener("click", (e) => {
+    delayAndOpenNewTab("atendimento.html", e.currentTarget);
+  });
+
+  document.getElementById("anamneseBtn").addEventListener("click", (e) => {
+    delayAndOpenNewTab("anamnese.html", e.currentTarget);
+  });
+
+  document.getElementById("loginBtn").addEventListener("click", (e) => {
+    delayAndOpenNewTab("login.html", e.currentTarget);
+  });
+
+  // Efeito partículas nos botões
+  document.querySelectorAll('.btn-magico').forEach(button => {
+    button.addEventListener('mouseenter', function() {
+      createParticles(this);
     });
+  });
 
-    document.getElementById("anamneseBtn").addEventListener("click", () => {
-      delayAndRedirect("anamnese.html");
-    });
+  function createParticles(button) {
+    const particlesContainer = button.querySelector('.particles');
+    particlesContainer.innerHTML = '';
 
-    // Efeito partículas nos botões
-    document.querySelectorAll('.btn-magico').forEach(button => {
-      button.addEventListener('mouseenter', function() {
-        createParticles(this);
+    for (let i = 0; i < 30; i++) {
+      const particle = document.createElement('span');
+      particle.style.position = 'absolute';
+      particle.style.width = '8px';
+      particle.style.height = '8px';
+      particle.style.backgroundColor = `hsl(${Math.random() * 60 + 270}, 100%, 70%)`;
+      particle.style.borderRadius = '50%';
+      particle.style.top = '50%';
+      particle.style.left = '50%';
+      particle.style.opacity = '1';
+      particle.style.transform = 'translate(-50%, -50%)';
+      particle.style.pointerEvents = 'none';
+
+      const animation = particle.animate([
+        { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+        { transform: `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(0)`, opacity: 0 }
+      ], {
+        duration: 1000 + Math.random() * 1000,
+        easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
       });
-    });
 
-    function createParticles(button) {
-      const particlesContainer = button.querySelector('.particles');
-      particlesContainer.innerHTML = '';
-
-      for (let i = 0; i < 30; i++) {
-        const particle = document.createElement('span');
-        particle.style.position = 'absolute';
-        particle.style.width = '8px';
-        particle.style.height = '8px';
-        particle.style.backgroundColor = `hsl(${Math.random() * 60 + 270}, 100%, 70%)`;
-        particle.style.borderRadius = '50%';
-        particle.style.top = '50%';
-        particle.style.left = '50%';
-        particle.style.opacity = '1';
-        particle.style.transform = 'translate(-50%, -50%)';
-        particle.style.pointerEvents = 'none';
-        
-        const animation = particle.animate([
-          { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
-          { transform: `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(0)`, opacity: 0 }
-        ], {
-          duration: 1000 + Math.random() * 1000,
-          easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
-        });
-        
-        animation.onfinish = () => { particle.remove(); };
-        particlesContainer.appendChild(particle);
-      }
+      animation.onfinish = () => { particle.remove(); };
+      particlesContainer.appendChild(particle);
     }
-  </script>
+  }
+</script>
+
 </body>
 </html>
