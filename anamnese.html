@@ -316,10 +316,13 @@
                 // 3. Envia o pacote para o servidor Python
                 alert("Preparando para enviar anamnese. Por favor, aguarde...");
 
-                const response = await fetch('/upload-pdf', {
-                    method: 'POST',
-                    body: formData
-                });
+                const dataAtual = new Date().toLocaleDateString('pt-BR'); // Formato dd/mm/yyyy
+const nomeCrianca = document.getElementById('nome').value;
+
+const response = await fetch(`/upload-pdf?nome=${encodeURIComponent(nomeCrianca)}&data=${encodeURIComponent(dataAtual)}`, {
+    method: 'POST',
+    body: formData
+});
 
                 // 4. Verifica a resposta do servidor
                 if (response.ok) {
