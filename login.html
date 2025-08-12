@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <link rel="shortcut icon" href="/flor.ico" type="image/x-icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Login - Sistema de Anamneses</title>
 <style>
     * {
@@ -22,6 +22,8 @@
         justify-content: center;
         align-items: center;
         color: #fff;
+        position: relative;
+        overflow: hidden;
     }
 
     @keyframes gradientBG {
@@ -39,6 +41,7 @@
         animation: fadeIn 1s ease;
         width: 300px;
         text-align: center;
+        z-index: 1;
     }
 
     @keyframes fadeIn {
@@ -120,20 +123,73 @@
         color: #ff6b6b;
         font-size: 0.9rem;
         margin-bottom: 10px;
+        display: none;
+    }
+
+    /* Popup de notificação */
+    #popupSuccess {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #28a745;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+        font-size: 1rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s ease;
+        z-index: 1000;
+    }
+
+    #popupSuccess.show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Ícone check */
+    #popupSuccess svg {
+        width: 20px;
+        height: 20px;
+        fill: white;
+    }
+
+    /* Fade out overlay para transição */
+    #fadeOutOverlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 1s ease;
+        z-index: 2000;
+    }
+
+    #fadeOutOverlay.show {
+        opacity: 0.8;
+        pointer-events: auto;
     }
 </style>
 </head>
 <body>
 <div class="container">
     <h2>🔐 Login</h2>
-    {% if erro %}<p class="erro">{{ erro }}</p>{% endif %}
-    <form method="POST">
-        
+    <p class="erro" id="erroMsg"></p>
+    <form id="loginForm" onsubmit="return validarLogin(event)">
         <div class="input-group">
-            <input type="text" name="usuario" placeholder="Usuário" required>
+            <input type="text" id="usuario" name="usuario" placeholder="Usuário" required />
         </div>
         <div class="input-group">
-            <input type="password" name="senha" placeholder="Senha" required>
+            <input type="password" id="senha" name="senha" placeholder="Senha" required />
         </div>
         <button type="submit" class="btn-magico">
             <span>Entrar</span>
@@ -142,7 +198,59 @@
     </form>
 </div>
 
+<!-- Popup de sucesso -->
+<div id="popupSuccess" aria-live="assertive" role="alert" aria-atomic="true">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+    </svg>
+    Login efetuado com sucesso!
+</div>
+
+<!-- Overlay para fade out -->
+<div id="fadeOutOverlay"></div>
+
 <script>
+    function validarLogin(e) {
+        e.preventDefault();
+
+        const usuario = document.getElementById('usuario').value.trim();
+        const senha = document.getElementById('senha').value.trim();
+        const erroMsg = document.getElementById('erroMsg');
+
+        const usuarioValido = 'NataliaCF06';
+        const senhaValida = '95120501';
+
+        if (usuario === usuarioValido && senha === senhaValida) {
+            erroMsg.style.display = 'none';
+            mostrarPopup(() => iniciarFadeOut(() => {
+                window.location.href = 'atendimentos.html';
+            }));
+            document.getElementById('loginForm').reset();
+        } else {
+            erroMsg.textContent = 'Usuário ou senha inválidos!';
+            erroMsg.style.display = 'block';
+        }
+
+        return false;
+    }
+
+    function mostrarPopup(callback) {
+        const popup = document.getElementById('popupSuccess');
+        popup.classList.add('show');
+        setTimeout(() => {
+            popup.classList.remove('show');
+            if (callback) callback();
+        }, 3000);
+    }
+
+    function iniciarFadeOut(callback) {
+        const overlay = document.getElementById('fadeOutOverlay');
+        overlay.classList.add('show');
+        setTimeout(() => {
+            if (callback) callback();
+        }, 1000);
+    }
+
     document.querySelector('.btn-magico').addEventListener('mouseenter', function() {
         createParticles(this);
     });
@@ -162,7 +270,7 @@
             particle.style.left = '50%';
             particle.style.opacity = '1';
             particle.style.transform = 'translate(-50%, -50%)';
-            
+
             const animation = particle.animate([
                 { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
                 { transform: `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(0)`, opacity: 0 }
@@ -170,7 +278,7 @@
                 duration: 900 + Math.random() * 800,
                 easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
             });
-            
+
             animation.onfinish = () => { particle.remove(); };
             particlesContainer.appendChild(particle);
         }
