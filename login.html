@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="shortcut icon" href="/flor.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Sistema de Anamneses</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+        height: 100vh;
+        background: linear-gradient(135deg, #000000 0%, #002a64 100%);
+        background-size: 400% 400%;
+        animation: gradientBG 10s ease infinite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+    }
+
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .container {
+        background: rgba(0, 0, 0, 0.25);
+        padding: 30px 35px;
+        border-radius: 16px;
+        backdrop-filter: blur(14px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        animation: fadeIn 1s ease;
+        width: 300px;
+        text-align: center;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+        font-size: 1.5rem;
+    }
+
+    .input-group {
+        margin-bottom: 15px;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px 15px;
+        border: none;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.15);
+        color: white;
+        font-size: 0.95rem;
+        outline: none;
+        transition: all 0.3s ease;
+        box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+    }
+
+    input::placeholder {
+        color: rgba(255,255,255,0.6);
+    }
+
+    input:focus {
+        background: rgba(255,255,255,0.25);
+        box-shadow: 0 0 8px rgba(51, 153, 255, 0.8);
+    }
+
+    .btn-magico {
+        position: relative;
+        border: none;
+        outline: none;
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #fff;
+        border-radius: 50px;
+        background: linear-gradient(45deg, #000000, #3333ff);
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2),
+                    inset 0 -5px 15px rgba(0, 0, 0, 0.3),
+                    inset 0 5px 10px rgba(255, 255, 255, 0.2);
+        animation: pulse 2s infinite;
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    .btn-magico:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3),
+                    inset 0 -5px 15px rgba(0, 0, 0, 0.3),
+                    inset 0 5px 10px rgba(255, 255, 255, 0.3);
+        background: linear-gradient(45deg, #8888d8, #1100ff);
+    }
+
+    .particles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .erro {
+        color: #ff6b6b;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>🔐 Login</h2>
+    {% if erro %}<p class="erro">{{ erro }}</p>{% endif %}
+    <form method="POST">
+        
+        <div class="input-group">
+            <input type="text" name="usuario" placeholder="Usuário" required>
+        </div>
+        <div class="input-group">
+            <input type="password" name="senha" placeholder="Senha" required>
+        </div>
+        <button type="submit" class="btn-magico">
+            <span>Entrar</span>
+            <div class="particles"></div>
+        </button>
+    </form>
+</div>
+
+<script>
+    document.querySelector('.btn-magico').addEventListener('mouseenter', function() {
+        createParticles(this);
+    });
+
+    function createParticles(button) {
+        const particlesContainer = button.querySelector('.particles');
+        particlesContainer.innerHTML = '';
+
+        for (let i = 0; i < 25; i++) {
+            const particle = document.createElement('span');
+            particle.style.position = 'absolute';
+            particle.style.width = '6px';
+            particle.style.height = '6px';
+            particle.style.backgroundColor = `hsl(${Math.random() * 60 + 270}, 100%, 70%)`;
+            particle.style.borderRadius = '50%';
+            particle.style.top = '50%';
+            particle.style.left = '50%';
+            particle.style.opacity = '1';
+            particle.style.transform = 'translate(-50%, -50%)';
+            
+            const animation = particle.animate([
+                { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+                { transform: `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(0)`, opacity: 0 }
+            ], {
+                duration: 900 + Math.random() * 800,
+                easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+            });
+            
+            animation.onfinish = () => { particle.remove(); };
+            particlesContainer.appendChild(particle);
+        }
+    }
+</script>
+</body>
+</html>
