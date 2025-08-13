@@ -1,376 +1,1583 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
+
+
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="flor.ico" type="image/x-icon" />
-    <title>Anamnese Psicopedagógica</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+<meta charset="UTF-8" />
 
-        body {
-            background: linear-gradient(135deg, #000000 0%, #00193b 100%);
-            color: #fff;
-            line-height: 1.6;
-            padding: 20px;
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(12px);
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
+<link rel="shortcut icon" href="flor.ico" type="image/x-icon" />
 
-        h1,
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #fff;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
+<title>Anamnese Psicopedagógica</title>
 
-        .form-section {
-            margin-bottom: 30px;
-        }
+<style>
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+* {
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
+margin: 0;
 
-        input,
-        textarea,
-        select {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            background: rgba(255, 255, 255, 0.7);
-            color: #000;
-            outline: none;
-        }
+padding: 0;
 
-        input[type="checkbox"] {
-            width: auto;
-            margin-right: 10px;
-        }
+box-sizing: border-box;
 
-        textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
-        .checkbox-group {
-            margin-bottom: 10px;
-        }
-        .checkbox-group label {
-            display: inline-flex;
-            align-items: center;
-            margin-right: 15px;
-        }
+}
 
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            display: block;
-            width: 100%;
-            margin-top: 30px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.2s ease-in-out;
-        }
 
-        button:hover {
-            background-color: #2980b9;
-            transform: scale(1.02);
-        }
 
-        .expand-title {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+body {
 
-        .expand-title:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
+background: linear-gradient(135deg, #000000 0%, #00193b 100%);
 
-        .expand-title::after {
-            content: '+';
-            font-size: 20px;
-            transition: transform 0.3s ease;
-        }
+color: #fff;
 
-        .expand-title.active::after {
-            transform: rotate(45deg);
-        }
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+line-height: 1.6;
+
+padding: 20px;
+
+}
+
+
+
+.container {
+
+max-width: 900px;
+
+margin: 0 auto;
+
+background: rgba(0, 0, 0, 0.25);
+
+backdrop-filter: blur(12px);
+
+padding: 30px;
+
+border-radius: 16px;
+
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+
+border: 1px solid rgba(255, 255, 255, 0.18);
+
+}
+
+
+
+h1,
+
+h2 {
+
+text-align: center;
+
+margin-bottom: 20px;
+
+color: #fff;
+
+text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+}
+
+
+
+.form-section {
+
+margin-bottom: 30px;
+
+}
+
+
+
+.form-group {
+
+margin-bottom: 15px;
+
+}
+
+
+
+label {
+
+display: block;
+
+margin-bottom: 5px;
+
+font-weight: 500;
+
+color: #fff;
+
+}
+
+
+
+input,
+
+textarea,
+
+select {
+
+width: 100%;
+
+padding: 10px;
+
+border: none;
+
+border-radius: 8px;
+
+font-size: 16px;
+
+background: rgba(255, 255, 255, 0.7);
+
+outline: none;
+
+}
+
+
+
+input[type="checkbox"] {
+
+width: auto;
+
+margin-right: 10px;
+
+}
+
+
+
+textarea {
+
+min-height: 80px;
+
+resize: vertical;
+
+}
+
+
+
+.checkbox-group {
+
+margin-bottom: 10px;
+
+}
+
+
+
+button {
+
+background-color: #3498db;
+
+color: white;
+
+border: none;
+
+padding: 12px 20px;
+
+font-size: 16px;
+
+border-radius: 8px;
+
+cursor: pointer;
+
+display: block;
+
+width: 100%;
+
+margin-top: 30px;
+
+font-weight: 600;
+
+letter-spacing: 1px;
+
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+}
+
+
+
+button:hover {
+
+background-color: #2980b9;
+
+transform: scale(1.03);
+
+}
+
+
+
+.back-button {
+
+background-color: #555;
+
+}
+
+
+
+.back-button:hover {
+
+background-color: #444;
+
+}
+
+
+
+.expand-title {
+
+background: rgba(255, 255, 255, 0.1);
+
+padding: 10px 15px;
+
+border-radius: 8px;
+
+margin-bottom: 5px;
+
+cursor: pointer;
+
+transition: all 0.3s ease;
+
+display: flex;
+
+justify-content: space-between;
+
+align-items: center;
+
+}
+
+
+
+.expand-title:hover {
+
+background: rgba(255, 255, 255, 0.2);
+
+}
+
+
+
+.expand-title::after {
+
+content: '+';
+
+font-size: 20px;
+
+transition: transform 0.3s ease;
+
+}
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 </head>
+
+
+
 <body>
-    <div class="container">
-        <h1>ANAMNESE PSICOPEDAGÓGICA</h1>
 
-        <form id="anamneseForm">
-            <div class="form-section">
-              <h2>1. IDENTIFICAÇÃO</h2>
-              <div class="form-group"><label>Nome da Criança:</label><input type="text" id="nome" required></div>
-              <div class="form-group">
-                <div class="form-group"><label>Data de Nascimento:</label><input type="date" id="nascimento" required></div>
-                <div class="form-group"><label>Idade:</label><input type="number" id="idade_crianca" readonly></div>
-                <div class="form-group"><label>Endereço:</label><input type="text" id="endereco" required></div>
-                <div class="form-group"><label>Bairro:</label><input type="text" id="bairro" required></div>
-                <div class="form-group"><label>Instituição de Ensino:</label><input type="text" id="escola" required></div>
-              </div>
-            </div>
+<div class="container">
 
-            <div class="form-section">
-                <h2>2. DADOS DOS RESPONSÁVEIS</h2>
-                <div class="form-group"><label>Responsável 1:</label><input type="text" id="resp1" required></div>
-                <div class="form-group"><label>Idade:</label><input type="number" id="idade1" required></div>
-                <div class="form-group"><label>Escolaridade:</label><input type="text" id="escolaridade1" required></div>
-                <div class="form-group"><label>Profissão:</label><input type="text" id="profissao1" required></div>
-                <div class="form-group"><label>Responsável 2:</label><input type="text" id="resp2"></div>
-                <div class="form-group"><label>Idade:</label><input type="number" id="idade2"></div>
-                <div class="form-group"><label>Escolaridade:</label><input type="text" id="escolaridade2"></div>
-                <div class="form-group"><label>Profissão:</label><input type="text" id="profissao2"></div>
-                <div class="form-group"><label>Genitora:</label><input type="text" id="genitora"></div>
-                <div class="form-group"><label>Histórico de outras gestações:</label><input type="text" id="gestacoes"></div>
-                <div class="form-group"><label>Partos:</label><input type="number" id="partos"></div>
-                <div class="form-group"><label>Abortos:</label><input type="number" id="abortos"></div>
-            </div>
+<h1>ANAMNESE PSICOPEDAGÓGICA</h1>
 
-            <div class="form-section">
-                <h2>3. GESTAÇÃO/NASCIMENTO</h2>
-                <div class="form-group"><label>a) A gravidez foi planejada pelos pais?</label><input type="text" id="planeja_pais"></div>
-                <div class="form-group"><label>b) A gestação foi uma experiência agradável para a mãe?</label><input type="text" id="gestacao_agreavel"></div>
-                <div class="form-group"><label>Por que?</label><input type="text" id="gestacao_por_que"></div>
-                <div class="form-group"><label>c) Como foi a saúde da mãe?</label><input type="text" id="saude_mae"></div>
-                <div class="form-group"><label>d) E o estado emocional?</label><input type="text" id="estado_emocional"></div>
-                <div class="form-group"><label>e) Fez o pré-natal?</label><input type="text" id="fez_prenatal" required></div>
-                <div class="form-group"><label>Foi necessário algum tratamento?</label><input type="text" id="tratamento_prenatal"></div>
-                <div class="form-group"><label>f) Nascimento - Tipo de parto:</label><input type="text" id="tipo_parto"></div>
-            </div>
 
-            <div class="form-section">
-                <h2>4. ALIMENTAÇÃO</h2>
-                <div class="form-group checkbox-group"><label>a) Foi amamentado?</label><label><input type="radio" name="amamentado" value="sim"> Sim</label><label><input type="radio" name="amamentado" value="nao"> Não</label></div>
-                <div class="form-group"><label>b) Teve problemas com alimentação?</label><input type="text" id="problemas"></div>
-                <div class="form-group"><label>c) Alimentação atual:</label><input type="text" id="alimentacao"></div>
-            </div>
 
-            <div class="form-section">
-                <h2>5. SAÚDE</h2>
-                <div class="form-group checkbox-group"><label>a) Está com a vacinação atualizada?</label><label><input type="radio" name="vacina" value="sim"> Sim</label><label><input type="radio" name="vacina" value="nao"> Não</label></div>
-                <div class="form-group"><label>b) Quais doenças teve na infância?</label><input type="text" id="doencas_infancia"></div>
-                <div class="form-group"><label>c) Outras:</label>
-                    <div class="checkbox-group"><label><input type="checkbox" name="outras" value="Febre Alta"> Febre Alta</label><label><input type="checkbox" name="outras" value="Convulsoes"> Convulsões</label><label><input type="checkbox" name="outras" value="Cirurgias"> Cirurgias</label><label><input type="checkbox" name="outras" value="Acidentes"> Acidentes</label><label><input type="checkbox" name="outras" value="Alergias"> Alergias</label></div>
-                    <div class="checkbox-group"><label><input type="checkbox" name="outras" value="Audição"> Problemas com a audição</label><label><input type="checkbox" name="outras" value="Visao"> Problemas de visão</label></div>
-                    <div class="checkbox-group"><label><input type="checkbox" name="outras" value="Faz tratamento"> Faz algum tratamento?</label><input type="text" id="qual_tratamento" placeholder="Qual?"></div>
-                    <div class="checkbox-group"><label><input type="checkbox" name="outras" value="Medicamentos"> Faz uso contínuo de medicamentos?</label><input type="text" id="qual_medicamento" placeholder="Qual?"></div>
-                </div>
-            </div>
+<form id="anamneseForm">
 
-            </form>
-        <button type="button" onclick="gerarEEnviarPDF()">Salvar e Enviar Anamnese</button>
-    </div>
+<div class="form-section">
 
-    <script>
-        /**
-         * Função principal: Gera o PDF com os dados do formulário e o envia para o servidor.
-         */
-        async function gerarEEnviarPDF() {
-            // Pega o nome da criança para usar como nome do arquivo
-            const nomeCrianca = document.getElementById('nome')?.value.trim();
-            if (!nomeCrianca) {
-                alert("Por favor, preencha o nome da criança antes de salvar.");
-                return;
-            }
+<h2>1. IDENTIFICAÇÃO</h2>
 
-            // Cria um nome de arquivo seguro e único (Ex: Joao_Silva_20250812.pdf)
-            const dataFormatada = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-            const nomeArquivo = `${nomeCrianca.replace(/[^a-zA-Z0-9]/g, '_')}_${dataFormatada}.pdf`;
+<div class="form-group"><label>Nome da Criança:</label><input type="text" id="nome" required></div>
 
-            // Inicializa a biblioteca jsPDF
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+<div class="form-group">
 
-            // Funções auxiliares para preencher o PDF
-            let y = 20; // Posição vertical inicial no PDF
-            const margin = 20;
-            const pageHeight = doc.internal.pageSize.getHeight();
-            const usableWidth = doc.internal.pageSize.getWidth() - 2 * margin;
+<div class="form-group">
 
-            const linha = (texto, espacamento = 7) => {
-                if (y > pageHeight - margin) { // Se chegar no fim da página, cria uma nova
-                    doc.addPage();
-                    y = margin;
-                }
-                const linhas = doc.splitTextToSize(texto, usableWidth);
-                doc.text(linhas, margin, y);
-                y += (linhas.length * (espacamento - 2)); // Ajusta o espaçamento para multilinhas
-            };
-            const get = (id) => document.getElementById(id)?.value || '';
-            const check = (id) => document.getElementById(id)?.checked ? 'Sim' : 'Não';
-            const radio = (name) => {
-                const checked = document.querySelector(`input[name="${name}"]:checked`);
-                return checked ? checked.value : 'Não informado';
-            };
-            const checkboxes = (name) => {
-                const checked = Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(cb => cb.value);
-                return checked.length > 0 ? checked.join(', ') : 'Nenhuma opção marcada';
-            };
+<label>Data de Nascimento:</label>
 
-            // --- INÍCIO DA CRIAÇÃO DO CONTEÚDO DO PDF ---
-            doc.setFontSize(16);
-            doc.setFont("helvetica", "bold");
-            doc.text('ANAMNESE PSICOPEDAGÓGICA', doc.internal.pageSize.getWidth() / 2, y, { align: 'center' });
-            y += 15;
+<input type="date" id="nascimento" required>
 
-            const addSection = (title) => {
-                y += 5;
-                doc.setFontSize(12);
-                doc.setFont("helvetica", "bold");
-                linha(title.toUpperCase());
-                doc.setFont("helvetica", "normal");
-                doc.setFontSize(11);
-                y += 2;
-            };
+</div>
 
-            addSection('1. Identificação');
-            linha(`Nome da Criança: ${get('nome')}`);
-            linha(`Data de Nascimento: ${get('nascimento')}`);
-            linha(`Idade: ${get('idade_crianca')}`);
-            linha(`Endereço: ${get('endereco')}, ${get('bairro')}`);
-            linha(`Instituição de Ensino: ${get('escola')}`);
 
-            addSection('2. Dados dos Responsáveis');
-            linha(`Responsável 1: ${get('resp1')} | Idade: ${get('idade1')} | Escolaridade: ${get('escolaridade1')} | Profissão: ${get('profissao1')}`);
-            if (get('resp2')) {
-                linha(`Responsável 2: ${get('resp2')} | Idade: ${get('idade2')} | Escolaridade: ${get('escolaridade2')} | Profissão: ${get('profissao2')}`);
-            }
-            linha(`Genitora: ${get('genitora')}`);
-            linha(`Histórico de gestações: ${get('gestacoes')} | Partos: ${get('partos')} | Abortos: ${get('abortos')}`);
-            
-            addSection('3. Gestação/Nascimento');
-            linha(`Gravidez planejada: ${get('planeja_pais')}`);
-            linha(`Experiência da gestação: ${get('gestacao_agreavel')} - Motivo: ${get('gestacao_por_que')}`);
-            linha(`Saúde da mãe na gestação: ${get('saude_mae')}`);
-            linha(`Estado emocional na gestação: ${get('estado_emocional')}`);
-            linha(`Fez pré-natal: ${get('fez_prenatal')} - Necessitou tratamento? ${get('tratamento_prenatal')}`);
-            linha(`Tipo de parto: ${get('tipo_parto')}`);
 
-            addSection('4. Alimentação');
-            linha(`Foi amamentado: ${radio('amamentado')}`);
-            linha(`Problemas com alimentação: ${get('problemas')}`);
-            linha(`Alimentação atual: ${get('alimentacao')}`);
+<div class="form-group">
 
-            addSection('5. Saúde');
-            linha(`Vacinação atualizada: ${radio('vacina')}`);
-            linha(`Doenças da infância: ${get('doencas_infancia')}`);
-            let outrasSaude = checkboxes('outras');
-            if (document.querySelector('input[value="Faz tratamento"]').checked) outrasSaude += ` (Tratamento: ${get('qual_tratamento')})`;
-            if (document.querySelector('input[value="Medicamentos"]').checked) outrasSaude += ` (Medicamento: ${get('qual_medicamento')})`;
-            linha(`Outras questões de saúde: ${outrasSaude}`);
-            
-            // --- FIM DA CRIAÇÃO DO CONTEÚDO DO PDF ---
+<label>Idade:</label>
 
-            // --- INÍCIO DA LÓGICA DE ENVIO PARA O SERVIDOR ---
-            try {
-                // 1. Gera o PDF como um "Blob" (arquivo em memória)
-                const pdfBlob = doc.output('blob');
+<input type="number" id="idade_crianca" required readonly>
 
-                // 2. Cria um pacote de dados de formulário
-                const formData = new FormData();
-                formData.append('arquivo_pdf', pdfBlob, nomeArquivo);
+</div>
 
-                // 3. Envia o pacote para o servidor Python
-                alert("Preparando para enviar anamnese. Por favor, aguarde...");
+<div class="form-group"><label>Endereço:</label><input type="text" id="endereco" required></div>
 
-                const dataAtual = new Date().toLocaleDateString('pt-BR'); // Formato dd/mm/yyyy
-const nomeCrianca = document.getElementById('nome').value;
+<div class="form-group"><label>Bairro:</label><input type="text" id="bairro" required></div>
 
-const response = await fetch(`/upload-pdf?nome=${encodeURIComponent(nomeCrianca)}&data=${encodeURIComponent(dataAtual)}`, {
-    method: 'POST',
-    body: formData
+<div class="form-group"><label>Instituição de Ensino:</label><input type="text" id="escola" required></div>
+
+</div>
+
+
+
+<div class="form-section">
+
+<h2>2. DADOS DOS RESPONSÁVEIS</h2>
+
+<div class="form-group"><label>Responsável 1:</label><input type="text" id="resp1" required></div>
+
+<div class="form-group"><label>Idade:</label><input type="number" id="idade1" required></div>
+
+<div class="form-group"><label>Escolaridade:</label><input type="text" id="escolaridade1" required></div>
+
+<div class="form-group"><label>Profissão:</label><input type="text" id="profissao1" required></div>
+
+<div class="form-group"><label>Responsável 2:</label><input type="text" id="resp2"></div>
+
+<div class="form-group"><label>Idade:</label><input type="number" id="idade2"></div>
+
+<div class="form-group"><label>Escolaridade:</label><input type="text" id="escolaridade2"></div>
+
+<div class="form-group"><label>Profissão:</label><input type="text" id="profissao2"></div>
+
+<div class="form-group"><label>Genitora:</label><input type="text" id="genitora"></div>
+
+<div class="form-group"><label>Histórico de outras gestações:</label><input type="text" id="gestacoes"></div>
+
+<div class="form-group"><label>Partos:</label><input type="number" id="partos"></div>
+
+<div class="form-group"><label>Abortos:</label><input type="number" id="abortos"></div>
+
+</div>
+
+
+
+<div class="form-section">
+
+<h2>3. GESTAÇÃO/NASCIMENTO </h2>
+
+<div>
+
+<label>a) A gravidez foi planejada pelos pais?</label>
+
+<input type="text" name="planeja_pais" id="planeja_pais">
+
+</div>
+
+<div>
+
+<label>b) A gestação foi uma experiência agradável para a mãe?</label>
+
+<input type="text" name="gestacao_agreavel" id="gestacao_agreavel">
+
+<label>Por que?</label>
+
+<input type="text" name="gestacao_por_que" id="gestacao_por_que">
+
+</div>
+
+<div>
+
+<label>c) Como foi a saúde da mãe?</label>
+
+<input type="text" name="saude_mae" id="saude_mae">
+
+</div>
+
+<div>
+
+<label>d) E o estado emocional?</label>
+
+<input type="text" name="estado_emocional" id="estado_emocional">
+
+</div>
+
+<div>
+
+<label>e) Fez o pré-natal?</label>
+
+<input type="text" name="fez_prenatal" id="fez_prenatal" required>
+
+<label>Foi necessário algum tratamento?</label>
+
+<input type="text" name="tratamento_prenatal" id="tratamento_prenatal">
+
+</div>
+
+<div>
+
+<label>f) Nascimento - Tipo de parto:</label>
+
+<input type="text" name="tipo_parto" id="tipo_parto">
+
+</div>
+
+</div>
+
+
+
+<div class="form-section">
+
+<h2>4. ALIMENTAÇÃO</h2>
+
+<div>
+
+<label>a) Foi amamentado?</label>
+
+<label><input type="checkbox" name="amamentado" id="amamentado_sim" value="sim"> Sim</label>
+
+<label><input type="checkbox" name="amamentado" id="amamentado_nao" value="nao"> Não</label>
+
+</div>
+
+<div>
+
+<label>b) Teve problemas com alimentação?</label>
+
+<input type="text" name="problemas" id="problemas">
+
+</div>
+
+</div>
+
+
+
+<div>
+
+<label>c) Alimentação atual:</label>
+
+<input type="text" name="alimentacao" id="alimentacao">
+
+</div>
+
+
+
+<div class="form-section">
+
+<h2>5. SAÚDE</h2>
+
+<div>
+
+<label>a) Está com a vacinação atualizada?</label>
+
+<label><input type="checkbox" name="vacina" id="vacina_sim" value="sim"> Sim</label>
+
+<label><input type="checkbox" name="vacina" id="vacina_nao" value="nao"> Não</label>
+
+</div>
+
+<div>
+
+<label>b) Quais doenças teve na infância?</label>
+
+<input type="text" name="doencas_infancia" id="doencas_infancia">
+
+</div>
+
+<div>
+
+<label>c) Outras:</label><br>
+
+<label><input type="checkbox" name="outras" id="outras_febre" value="Febre Alta"> Febre Alta</label>
+
+<label><input type="checkbox" name="outras" id="outras_convulsoes" value="Convulsoes"> Convulsões</label>
+
+<label><input type="checkbox" name="outras" id="outras_cirurgias" value="Cirurgias"> Cirurgias</label>
+
+<label><input type="checkbox" name="outras" id="outras_acidentes" value="Acidentes"> Acidentes</label>
+
+<label><input type="checkbox" name="outras" id="outras_alergias" value="Alergias"> Alergias</label>
+
+<label><input type="checkbox" name="outras" id="outras_audicao" value="Audição"> Problemas com a
+
+audição</label>
+
+<label><input type="checkbox" name="outras" id="outras_visao" value="Visao"> Problemas de visão</label>
+
+<label><input type="checkbox" name="outras" id="outras_tratamento" value="Algum tratamento"> Algum
+
+tratamento</label>
+
+<label><input type="checkbox" name="outras" id="outras_infeccoes" value="Infecções"> Infecções</label><br>
+
+<label><input type="checkbox" name="outras" id="outras_faz_tratamento" value="Faz tratamento"> Faz algum
+
+tratamento – qual?</label>
+
+<input type="text" name="qual_tratamento" id="qual_tratamento"><br>
+
+<label><input type="checkbox" name="outras" id="outras_medicamentos" value="Medicamentos"> Faz uso contínuo
+
+de
+
+medicamentos – qual?</label>
+
+<input type="text" name="qual_medicamento" id="qual_medicamento">
+
+</div>
+
+</div>
+
+
+
+<div class="form-section">
+
+<h2>6. DESENVOLVIMENTO</h2>
+
+<div>
+
+<label>a) Idade em que andou:</label>
+
+<input type="text" name="idade_andou" id="idade_andou">
+
+</div>
+
+<div>
+
+<label>b) Idade em que falou:</label>
+
+<input type="text" name="idade_falou" id="idade_falou">
+
+</div>
+
+<div>
+
+<label>c) Desenvolvimento motor:</label>
+
+<input type="text" name="desenvolvimento_motor" id="desenvolvimento_motor">
+
+</div>
+
+<div>
+
+<label>d) Alguma dificuldade na fala?</label>
+
+<input type="text" name="dificuldade_fala" id="dificuldade_fala">
+
+</div>
+
+<div>
+
+<label>e) Desenvolvimento atual da linguagem:</label>
+
+<input type="text" name="linguagem_atual" id="linguagem_atual">
+
+</div>
+
+<div>
+
+<label>f) Comunicação:</label>
+
+<input type="text" name="comunicacao" id="comunicacao">
+
+</div>
+
+<div>
+
+<label>g) Apresenta controle dos esfíncteres?</label>
+
+<input type="text" name="controle_esfincteres" id="controle_esfincteres">
+
+</div>
+
+<div>
+
+<label>h) É independente nas atividades da vida diária?</label>
+
+<input type="text" name="independente_atividades" id="independente_atividades">
+
+</div>
+
+<div>
+
+<label>i) Sono:</label>
+
+<label><input type="checkbox" name="sono" id="sono_bem" value="dorme_bem"> dorme bem, calmo</label>
+
+<label><input type="checkbox" name="sono" id="sono_agitado" value="agitado"> agitado, tem pesadelos</label>
+
+</div>
+
+<div>
+
+<label>j) Apresenta curiosidade sexual?</label>
+
+<input type="text" name="curiosidade_sexual" id="curiosidade_sexual">
+
+</div>
+
+<div>
+
+<label>k) Masturba?</label>
+
+<input type="text" name="masturba" id="masturba">
+
+<label>com frequência?</label>
+
+<input type="text" name="frequencia_masturba" id="frequencia_masturba">
+
+</div>
+
+<div>
+
+<label>l) Recebe orientação sexual?</label>
+
+<input type="text" name="orientacao_sexual" id="orientacao_sexual">
+
+</div>
+
+</div>
+
+
+
+<div class="form-section">
+
+<h2>7. SOCIALIZAÇÃO E PREFERÊNCIAS</h2>
+
+<div>
+
+<label>a) Faz amigos com facilidade?</label>
+
+<input type="text" name="facilidade_amigos" id="facilidade_amigos">
+
+</div>
+
+<div>
+
+<label>b) Tem amigos na vizinhança?</label>
+
+<input type="text" name="amigos_vizinhanca" id="amigos_vizinhanca">
+
+</div>
+
+<div>
+
+<label>c) Gosta de passeios e festas?</label>
+
+<input type="text" name="passeios_festas" id="passeios_festas">
+
+</div>
+
+<div>
+
+<label>d) Preferências de diversão:</label>
+
+<input type="text" name="preferencia_diversao" id="preferencia_diversao">
+
+</div>
+
+<div>
+
+<label>e) Ele é:</label>
+
+<label><input type="checkbox" name="personalidade" id="personalidade_introvertido" value="introvertido">
+
+introvertido</label>
+
+<label><input type="checkbox" name="personalidade" id="personalidade_afetuoso" value="afetuoso">
+
+afetuoso</label>
+
+<label><input type="checkbox" name="personalidade" id="personalidade_obediente" value="obediente">
+
+obediente</label>
+
+<label><input type="checkbox" name="personalidade" id="personalidade_resistente" value="resistente">
+
+resistente</label>
+
+</div>
+
+<div>
+
+<label>f) Tem algum hábito/mania?</label>
+
+<input type="text" name="habito_mania" id="habito_mania">
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+<div class="form-section">
+
+<h2>II - ETAPA DE ESCOLARIZAÇÃO</h2>
+
+
+
+<!-- Ensino Fundamental - Fase I -->
+
+<button type="button" class="expand-title" onclick="toggleExpand('fundamental1')">
+
+Ensino Fundamental - Fase I
+
+</button>
+
+<div id="fundamental1Content" class="expand-content"
+
+style="display: none; margin-left: 20px; margin-bottom: 15px;">
+
+<div class="checkbox-group" style="display: flex; flex-direction: column; gap: 5px;">
+
+<label><input type="checkbox" id="ef1_1"> 1º ano</label>
+
+<label><input type="checkbox" id="ef1_2"> 2º ano</label>
+
+<label><input type="checkbox" id="ef1_3"> 3º ano</label>
+
+<label><input type="checkbox" id="ef1_4"> 4º ano</label>
+
+<label><input type="checkbox" id="ef1_5"> 5º ano</label>
+
+</div>
+
+</div>
+
+
+
+<!-- Ensino Fundamental - Fase II -->
+
+<button type="button" class="expand-title" onclick="toggleExpand('fundamental2')">
+
+Ensino Fundamental - Fase II
+
+</button>
+
+<div id="fundamental2Content" class="expand-content"
+
+style="display: none; margin-left: 20px; margin-bottom: 15px;">
+
+<div class="checkbox-group" style="display: flex; flex-direction: column; gap: 5px;">
+
+<label><input type="checkbox" id="ef2"> 6º ano</label>
+
+<label><input type="checkbox" id="ef3"> 7º ano</label>
+
+<label><input type="checkbox" id="ef4"> 8º ano</label>
+
+<label><input type="checkbox" id="ef5"> 9º ano</label>
+
+</div>
+
+</div>
+
+<br>
+
+<div class="checkbox-group">
+
+<label><input type="checkbox" id="socioeducacional"> Programa Socioeducacional</label>
+
+<br>
+
+<input type="text" id="anoSocioeducacional" placeholder="Ano (se aplicável)">
+
+</div>
+
+<br>
+
+<div class="checkbox-group">
+
+<label><input type="checkbox" id="espTrabalho"> Educação Especial para o Trabalho</label>
+
+</div>
+
+<br>
+
+<div class="form-group">
+
+<label>Turma:</label>
+
+<input type="text" id="turma">
+
+</div>
+
+<div class="form-group">
+
+<label>Turno:</label>
+
+<input type="text" id="turno">
+
+</div>
+
+</div>
+
+
+
+<div class="form-section">
+
+<h2>III - DEFICIÊNCIA</h2>
+
+
+
+<button type="button" class="expand-title" onclick="toggleExpand('intelectual')">
+
+Deficiência Intelectual
+
+</button>
+
+<div id="intelectualContent" class="expand-content" style="display: none;">
+
+<div style="margin-left: 20px; display: flex; flex-direction: column; gap: 8px; padding-top: 8px;">
+
+<label><input type="checkbox" id="leve"> Leve</label>
+
+<label><input type="checkbox" id="moderado"> Moderado</label>
+
+<label><input type="checkbox" id="grave"> Grave</label>
+
+<label><input type="checkbox" id="severo"> Severo</label>
+
+</div>
+
+</div>
+
+
+
+<button type="button" class="expand-title" onclick="toggleExpand('tea')">
+
+Transtorno do Espectro Autista (TEA)
+
+</button>
+
+<div id="teaContent" class="expand-content" style="display: none;">
+
+<div style="margin-left: 20px; display: flex; flex-direction: column; gap: 8px; padding-top: 8px;">
+
+<label><input type="checkbox" id="nivel1"> Nível I</label>
+
+<label><input type="checkbox" id="nivel2"> Nível II</label>
+
+<label><input type="checkbox" id="nivel3"> Nível III</label>
+
+</div>
+
+</div>
+
+
+
+<!-- Botão Suporte -->
+
+<button type="button" class="expand-title" onclick="toggleExpand('suporte')">
+
+Suporte
+
+</button>
+
+<div id="suporteContent" class="expand-content" style="display: none;">
+
+<div style="margin-left: 20px; display: flex; flex-direction: column; gap: 8px; padding-top: 8px;">
+
+<label><input type="checkbox" id="suporte_sim"> Sim</label>
+
+<label><input type="checkbox" id="suporte_nao"> Não</label>
+
+</div>
+
+</div>
+
+<br>
+
+
+
+<div class="form-group">
+
+<label>Outra complicação:</label>
+
+<input type="text" id="outra_complicacao" placeholder="Descreva se houver">
+
+</div>
+
+</div>
+
+<br>
+
+<button type="button" onclick="gerarPDF()">Salvar Anamnese (PDF)</button>
+
+</form>
+
+</div>
+
+
+
+<script>
+
+
+
+function gerarPDF() {
+
+const { jsPDF } = window.jspdf;
+
+const doc = new jsPDF();
+
+
+
+let y = 20;
+
+const linha = (texto, espacamento = 10) => {
+
+if (y > 270) {
+
+doc.addPage();
+
+y = 20;
+
+}
+
+doc.text(texto, 20, y);
+
+y += espacamento;
+
+};
+
+
+
+function isChecked(name, value) {
+
+const inputs = document.querySelectorAll(`[name="${name}"]`);
+
+for (let input of inputs) {
+
+if (input.type === "radio" && input.value === value && input.checked) return true;
+
+if (input.type === "checkbox" && input.value === value && input.checked) return true;
+
+}
+
+return false;
+
+}
+
+
+
+
+
+const get = (id) => document.getElementById(id)?.value || '';
+
+const check = (id) => document.getElementById(id)?.checked;
+
+doc.text('ANAMNESE PSICOPEDAGÓGICA', 105, y, { align: 'center' });
+
+doc.setFont("helvetica", "bold");
+
+y += 10;
+
+// --- 1. DADOS DA CRIANÇA ---
+
+doc.setFontSize(12);
+
+doc.setFont("helvetica", "bold");
+
+doc.text('1. DADOS DA CRIANÇA', 105, y, { align: 'center' });
+
+y += 10;
+
+linha('');
+
+doc.setFontSize(12);
+
+linha(`->Nome: ${get('nome')}`);
+
+linha(`->Data de Nascimento: ${get('nascimento')}`);
+
+linha(`->Idade: ${get('idade_crianca')}`);
+
+linha(`->Endereço: ${get('endereco')}`);
+
+linha(`->Bairro: ${get('bairro')}`);
+
+linha(`-> Instituição de Ensino: ${get('escola')}`);
+
+
+
+linha('');
+
+
+
+// --- 2. RESPONSÁVEIS ---
+
+doc.setFontSize(14);
+
+doc.setFont("helvetica", "bold");
+
+
+
+doc.text('2. RESPONSÁVEIS', 105, y, { align: 'center' });
+
+
+
+y += 10;
+
+doc.setFontSize(12);
+
+linha('');
+
+// Responsável 1
+
+linha(`->Responsável 1: ${get('resp1')}`);
+
+linha(`->Idade: ${get('idade1')}`);
+
+linha(`->Escolaridade: ${get('escolaridade1')}`);
+
+linha(`->Profissão: ${get('profissao1')}`);
+
+linha('');
+
+
+
+// Responsável 2
+
+linha(`->Responsável 2: ${get('resp2')}`);
+
+linha(`->Idade: ${get('idade2')}`);
+
+linha(`->Escolaridade: ${get('escolaridade2')}`);
+
+linha(`->Profissão: ${get('profissao2')}`);
+
+linha('');
+
+
+
+// Dados da mãe / genitora
+
+linha(`->Genitora: ${get('genitora')}`);
+
+linha(`->Histórico de gestações: ${get('gestacoes')}`);
+
+linha(`->Partos: ${get('partos')}`);
+
+linha(`->Abortos: ${get('abortos')}`);
+
+linha('');
+
+// --- 3. GESTAÇÃO E NASCIMENTO ---
+
+doc.setFontSize(14);
+
+doc.setFont("helvetica", "bold");
+
+
+
+doc.text('3. GESTAÇÃO E NASCIMENTO', 105, y, { align: 'center' });
+
+
+
+y += 10;
+
+linha('');
+
+doc.setFontSize(12);
+
+
+
+linha(`->A gravidez foi planejada pelos pais? ${get('planeja_pais')}`);
+
+linha(`->A gestação foi uma experiência agradável para a mãe? ${get('gestacao_agreavel')}`);
+
+linha(`->Por que? ${get('gestacao_por_que')}`);
+
+linha(`->Como foi a saúde da mãe? ${get('saude_mae')}`);
+
+linha(`->Estado emocional: ${get('estado_emocional')}`);
+
+linha(`->Fez o pré-natal? ${get('fez_prenatal')}`);
+
+linha(`->Foi necessário algum tratamento? ${get('tratamento_prenatal')}`);
+
+linha(`->Nascimento - Tipo de parto: ${get('tipo_parto')}`);
+
+linha('');
+
+// --- 4. ALIMENTAÇÃO ---
+
+doc.setFontSize(12);
+
+doc.setFont("helvetica", "bold");
+
+
+
+doc.text('4. ALIMENTAÇÃO', 105, y, { align: 'center' });
+
+y += 10;
+
+linha('');
+
+if (isChecked('amamentado', 'sim')) linha('->Foi amamentado: Sim');
+
+else if (isChecked('amamentado', 'nao')) linha('->Foi amamentado: Não');
+
+else linha('->Foi amamentado: Não informado');
+
+
+
+linha(`->Teve problemas com alimentação? ${get('problemas')}`);
+
+linha(`->Alimentação atual: ${get('alimentacao')}`);
+
+linha('');
+
+
+
+
+
+// --- 5. SAÚDE ---
+
+doc.setFontSize(12);
+
+doc.setFont("helvetica", "bold");
+
+doc.text('5. SAÚDE', 105, y, { align: 'center' });
+
+y += 10;
+
+linha('');
+
+if (isChecked('vacina', 'sim')) linha('->Vacinação atualizada: Sim');
+
+else if (isChecked('vacina', 'nao')) linha('->Vacinação atualizada: Não');
+
+else linha('->Vacinação atualizada:Não informado');
+
+
+
+linha(`->Doenças na infância: ${get('doencas_infancia')}`);
+
+
+
+const outrasOpcoes = [
+
+'Febre Alta', 'Convulsoes', 'Cirurgias', 'Acidentes',
+
+'Alergias', 'Audição', 'Visao', 'Algum tratamento',
+
+'Infecções', 'Faz tratamento', 'Medicamentos'
+
+];
+
+outrasOpcoes.forEach(opcao => {
+
+if (isChecked('outras', opcao)) {
+
+if (opcao === 'Faz tratamento')
+
+linha(`Faz tratamento: ${get('qual_tratamento')}`);
+
+else if (opcao === 'Medicamentos')
+
+linha(`Medicamentos de uso contínuo: ${get('qual_medicamento')}`);
+
+else
+
+linha(`• ${opcao}`);
+
+}
+
 });
 
-                // 4. Verifica a resposta do servidor
-                if (response.ok) {
-                    alert("Anamnese salva com sucesso no servidor!");
-                    window.location.href = '/atendimentos'; // Redireciona
-                } else {
-                    const erro = await response.json();
-                    alert(`Erro ao salvar no servidor: ${erro.mensagem}`);
-                }
-            } catch (error) {
-                console.error('Erro ao enviar o PDF:', error);
-                alert('Ocorreu um erro de conexão ao tentar enviar a anamnese.');
-            }
-        }
+linha('');
 
-        /**
-         * Funções de interatividade da página (originais)
-         */
-        function toggleExpand(id) {
-            const content = document.getElementById(id + 'Content');
-            const title = event.currentTarget;
-            if (content) {
-                const isActive = title.classList.toggle('active');
-                content.style.display = isActive ? 'block' : 'none';
-            }
-        }
+linha('');
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const nascimentoInput = document.getElementById('nascimento');
-            const idadeInput = document.getElementById('idade_crianca');
 
-            if (nascimentoInput) {
-                nascimentoInput.addEventListener('change', () => {
-                    if (nascimentoInput.value) {
-                        const dataNascimento = new Date(nascimentoInput.value);
-                        const hoje = new Date();
-                        let idade = hoje.getFullYear() - dataNascimento.getFullYear();
-                        const m = hoje.getMonth() - dataNascimento.getMonth();
-                        if (m < 0 || (m === 0 && hoje.getDate() < dataNascimento.getDate())) {
-                            idade--;
-                        }
-                        idadeInput.value = idade >= 0 ? idade : "";
-                    } else {
-                        idadeInput.value = "";
-                    }
-                });
-            }
-        });
-    </script>
+
+// --- 6. DESENVOLVIMENTO ---
+
+doc.setFontSize(12);
+
+doc.setFont("helvetica", "bold");
+
+doc.text('6. DESENVOLVIMENTO', 105, y, { align: 'center' });
+
+y += 10;
+
+linha('');
+
+doc.setFontSize(12);
+
+
+
+linha(`->Idade em que andou: ${get('idade_andou')}`);
+
+linha(`->Idade em que falou: ${get('idade_falou')}`);
+
+linha(`->Desenvolvimento motor: ${get('desenvolvimento_motor')}`);
+
+linha(`->Alguma dificuldade na fala? ${get('dificuldade_fala')}`);
+
+linha(`->Desenvolvimento atual da linguagem: ${get('linguagem_atual')}`);
+
+linha(`->Comunicação: ${get('comunicacao')}`);
+
+linha(`->Apresenta controle dos esfíncteres? ${get('controle_esfincteres')}`);
+
+linha(`->É independente nas atividades da vida diária? ${get('independente_atividades')}`);
+
+
+
+let sonoTexto = '';
+
+if (isChecked('->sono', 'dorme_bem')) sonoTexto += 'Dorme bem, calmo';
+
+if (isChecked('->sono', 'agitado')) sonoTexto += (sonoTexto ? ', ' : '') + 'Agitado, tem pesadelos';
+
+linha(`->Sono: ${sonoTexto || 'Não informado'}`);
+
+
+
+linha(`->Apresenta curiosidade sexual? ${get('curiosidade_sexual')}`);
+
+linha(`->Masturba? ${get('masturba')}` + (get('frequencia_masturba') ? ` com frequência: ${get('frequencia_masturba')}` : ''));
+
+linha(`->Recebe orientação sexual? ${get('orientacao_sexual')}`);
+
+linha('');
+
+
+
+
+
+// --- 7. SOCIALIZAÇÃO E PREFERÊNCIAS ---
+
+doc.setFontSize(12);
+
+doc.setFont("helvetica", "bold");
+
+doc.text('7. SOCIALIZAÇÃO E PREFERÊNCIAS', 105, y, { align: 'center' });
+
+y += 10;
+
+linha('');
+
+doc.setFontSize(12);
+
+
+
+linha(`->Faz amigos com facilidade? ${get('facilidade_amigos')}`);
+
+linha(`->Tem amigos na vizinhança? ${get('amigos_vizinhanca')}`);
+
+linha(`->Gosta de passeios e festas? ${get('passeios_festas')}`);
+
+linha(`->Preferências de diversão: ${get('preferencia_diversao')}`);
+
+
+
+const personalidadeValores = ['introvertido', 'afetuoso', 'obediente', 'resistente'];
+
+const personalidadeSelecionada = [];
+
+
+
+personalidadeValores.forEach(val => {
+
+if (isChecked('personalidade', val)) personalidadeSelecionada.push(val);
+
+});
+
+
+
+linha(`->Ele é: ${personalidadeSelecionada.length > 0 ? personalidadeSelecionada.join(', ') : 'Não informado'}`);
+
+linha(`->Tem algum hábito/mania? ${get('habito_mania')}`);
+
+
+
+linha('');
+
+linha('');
+
+
+
+doc.setFontSize(12);
+
+doc.text('INFORMAÇÕES DE ESCOLARIDADE', 105, y, { align: 'center' });
+
+y += 10;
+
+linha('');
+
+if (check('ef1_1')) linha('• 1º ano');
+
+if (check('ef1_2')) linha('• 2º ano');
+
+if (check('ef1_3')) linha('• 3º ano');
+
+if (check('ef1_4')) linha('• 4º ano');
+
+if (check('ef1_5')) linha('• 5º ano');
+
+linha('');
+
+if (check('ef2')) linha('• Ensino Fundamental - Fase II');
+
+linha('');
+
+if (check('ef1_1')) linha('• 6º ano');
+
+if (check('ef1_2')) linha('• 7º ano');
+
+if (check('ef1_3')) linha('• 8º ano');
+
+if (check('ef1_4')) linha('• 8º ano');
+
+if (check('ef1_5')) linha('• 9º ano');
+
+linha('');
+
+if (check('socioeducacional')) linha(`• Programa Socioeducacional - Ano: ${get('anoSocioeducacional')}`);
+
+linha('');
+
+if (check('espTrabalho')) linha('• Educação Especial para o Trabalho');
+
+linha('');
+
+if (get('turma')) linha('Turma: ' + get('turma'));
+
+linha('');
+
+if (get('turno')) linha('Turno: ' + get('turno'));
+
+linha('');
+
+linha('');
+
+linha('');
+
+doc.setFontSize(12);
+
+doc.text('DEFICIÊNCIA ', 105, y, { align: 'center' });
+
+y += 10;
+
+if (check('def_intelectual')) {
+
+linha('• Deficiência Intelectual');
+
+if (check('leve')) linha(' - Leve');
+
+if (check('moderado')) linha(' - Moderado');
+
+if (check('grave')) linha(' - Grave');
+
+if (check('severo')) linha(' - Severo');
+
+}
+
+linha('');
+
+linha('');
+
+if (check('tea')) {
+
+linha('• Transtorno do Espectro Autista (TEA)');
+
+if (check('nivel1')) linha(' - Nível I');
+
+if (check('nivel2')) linha(' - Nível II');
+
+if (check('nivel3')) linha(' - Nível III');
+
+}
+
+linha('');
+
+if (check('suporte')) {
+
+if (check('suporte_sim')) linha('Suporte: Sim');
+
+if (check('suporte_nao')) linha('Suporte: Não');
+
+}
+
+
+
+linha('');
+
+linha('');
+
+if (get('outra_complicacao')) linha('Outra complicação: ' + get('outra_complicacao'));
+
+
+
+if (y > 245) {
+
+doc.addPage();
+
+y = 20;
+
+}
+
+
+
+// Assinatura no rodapé
+
+if (y > 245) {
+
+doc.addPage();
+
+y = 20;
+
+}
+
+y = 265;
+
+doc.setDrawColor(0);
+
+doc.line(75, y, 135, y);
+
+y += 6;
+
+doc.setFontSize(12);
+
+doc.setFont("Times", "Bold");
+
+doc.text("NATALIA CRISTINA FERREIRA", 105, y, { align: "center" });
+
+y += 5;
+
+doc.setFontSize(11);
+
+doc.setFont("Times", "Normal");
+
+doc.text("PSICOPEDAGOGA CLÍNICA E INSTITUCIONAL", 105, y, { align: "center" });
+
+y += 5;
+
+doc.text("ABPq - 1651", 105, y, { align: "center" });
+
+
+
+doc.save("Anamnese_Psicopedagogica.pdf");
+
+}
+
+
+
+function toggleGrupo(id) {
+
+const grupo = document.getElementById(id);
+
+grupo.style.display = grupo.style.display === 'none' ? 'block' : 'none';
+
+}
+
+
+
+function toggleExpand(id) {
+
+const content = document.getElementById(id + 'Content');
+
+const title = event.currentTarget;
+
+
+
+// Alterna visual e exibe/esconde conteúdo
+
+title.classList.toggle('active');
+
+content.style.display = content.style.display === 'none' ? 'block' : 'none';
+
+
+
+// Garante que existe um checkbox oculto para indicar se o grupo foi expandido
+
+if (!document.getElementById(id)) {
+
+const hiddenCheck = document.createElement('input');
+
+hiddenCheck.type = 'checkbox';
+
+hiddenCheck.id = id;
+
+hiddenCheck.style.display = 'none';
+
+document.getElementById('anamneseForm').appendChild(hiddenCheck);
+
+}
+
+
+
+// Marca/desmarca o checkbox oculto conforme o estado da expansão
+
+document.getElementById(id).checked = title.classList.contains('active');
+
+}
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+const form = document.getElementById('anamneseForm');
+
+['def_intelectual', 'tea', 'suporte'].forEach(id => {
+
+if (!document.getElementById(id)) {
+
+const hiddenInput = document.createElement('input');
+
+hiddenInput.type = 'checkbox';
+
+hiddenInput.id = id;
+
+hiddenInput.style.display = 'none';
+
+form.appendChild(hiddenInput);
+
+}
+
+});
+
+const nascimento = document.getElementById('nascimento');
+
+const idadeInput = document.getElementById('idade_crianca');
+
+
+
+nascimento.addEventListener('change', () => {
+
+const dataNascimento = new Date(nascimento.value);
+
+if (!isNaN(dataNascimento)) {
+
+const hoje = new Date();
+
+let idade = hoje.getFullYear() - dataNascimento.getFullYear();
+
+const mesDiff = hoje.getMonth() - dataNascimento.getMonth();
+
+const diaDiff = hoje.getDate() - dataNascimento.getDate();
+
+
+
+// Ajusta se ainda não fez aniversário neste ano
+
+if (mesDiff < 0 || (mesDiff === 0 && diaDiff < 0)) {
+
+idade--;
+
+}
+
+
+
+idadeInput.value = idade >= 0 ? idade : '';
+
+} else {
+
+idadeInput.value = '';
+
+}
+
+});
+
+});
+
+</script>
+
 </body>
+
 </html>
